@@ -8,6 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(color: Colors.red);
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(title: Text("TEST1")),
+      body: Container(
+        color: Colors.amber,
+      ),
+    ));
   }
 }
