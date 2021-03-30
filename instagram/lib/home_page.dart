@@ -20,14 +20,28 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
+  List<Widget> _screens = <Widget>[
+    Container(
+      color: Colors.amberAccent,
+    ),
+    Container(
+      color: Colors.blueAccent,
+    ),
+    Container(
+      color: Colors.lightGreen,
+    ),
+    Container(
+      color: Colors.cyan[100],
+    ),
+    Container(color: Colors.purple[100]),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
       // appBar: AppBar(title: Text("TEST1")),
-      body: Container(
-        color: Colors.amberAccent,
-      ),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
