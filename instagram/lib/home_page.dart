@@ -20,7 +20,8 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
-  List<Widget> _screens = <Widget>[
+  // 매번 생성하지 않기 위해 static 선언
+  static List<Widget> _screens = <Widget>[
     Container(
       color: Colors.amberAccent,
     ),
@@ -41,7 +42,11 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         home: Scaffold(
       // appBar: AppBar(title: Text("TEST1")),
-      body: _screens[_selectedIndex],
+      // 스택을 이용하여 선택한 인덱스만 보이도록
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
