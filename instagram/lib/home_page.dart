@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/feed_screen.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -22,9 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   // 매번 생성하지 않기 위해 static 선언
   static List<Widget> _screens = <Widget>[
-    Container(
-      color: Colors.amberAccent,
-    ),
+    FeedScreen(),
     Container(
       color: Colors.blueAccent,
     ),
