@@ -7,15 +7,20 @@ class FeedScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text('123가나다Instargram'),
-        titleTextStyle: TextStyle(fontSize: 10),
+        title: Text(
+          '123가나다Instargram',
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 28,
+              fontFamily: "Cafe24Shiningstar"),
+        ),
       ),
       body: Center(
         child: Text(
           "Center~~123123456",
           style: TextStyle(
-              fontSize: 20,
-              color: Colors.blueGrey,
+              fontSize: 28,
+              color: Colors.redAccent,
               fontFamily: "Cafe24Shiningstar"),
         ),
       ),
