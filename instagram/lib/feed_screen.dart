@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // template: stless
@@ -5,25 +6,48 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text(
+      appBar: CupertinoNavigationBar(
+        leading: IconButton(
+          onPressed: null,
+          icon: Icon(CupertinoIcons.photo_camera_solid),
+          color: Colors.black87,
+        ),
+        middle: Text(
           '123가나다Instargram',
           style: TextStyle(
               color: Colors.black,
               fontSize: 28,
               fontFamily: "Cafe24Shiningstar"),
         ),
-      ),
-      body: Center(
-        child: Text(
-          "Center~~123123456",
-          style: TextStyle(
-              fontSize: 28,
-              color: Colors.redAccent,
-              fontFamily: "Cafe24Shiningstar"),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            IconButton(
+                onPressed: null,
+                icon: ImageIcon(
+                  AssetImage("assets/images/actionbar_camera.png"),
+                  color: Colors.redAccent,
+                )),
+            IconButton(
+                onPressed: null,
+                icon: ImageIcon(
+                  AssetImage("assets/images/actionbar_camera.png"),
+                  color: Colors.redAccent,
+                ))
+          ],
         ),
       ),
+      body: ListView.builder(
+        itemBuilder: feedListBuilder,
+        itemCount: 30,
+      ),
+    );
+  }
+
+  Widget feedListBuilder(BuildContext context, int index) {
+    return Container(
+      color: Colors.accents[index % Colors.accents.length],
+      height: 100,
     );
   }
 }
