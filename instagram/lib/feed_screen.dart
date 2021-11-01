@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/widgets/post.dart';
 
 // template: stless
 class FeedScreen extends StatelessWidget {
@@ -45,10 +46,7 @@ class FeedScreen extends StatelessWidget {
   }
 
   Widget feedListBuilder(BuildContext context, int index) {
-    return Container(
-      color: Colors.accents[index % Colors.accents.length],
-      height: 100,
-    );
+    return Post(index);
   }
 }
 
