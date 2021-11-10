@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
@@ -10,9 +11,8 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.accents[index % Colors.accents.length],
-      height: 100,
+    return CachedNetworkImage(
+      imageUrl: "https://picsum.photos/id/$index/200/300",
     );
   }
 }
