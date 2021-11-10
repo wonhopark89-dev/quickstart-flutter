@@ -20,10 +20,14 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SizedBox(
-          height: 24,
-          width: 24,
-          child: CircularProgressIndicator(color: Colors.redAccent),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset("assets/imgs/pengsoo.jpeg"),
+            Container(height: 100, color: Colors.amber),
+            Container(height: 100, color: Colors.green),
+            Container(height: 100, color: Colors.yellow)
+          ],
         ),
       ),
     );
