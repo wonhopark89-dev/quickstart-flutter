@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            ExtendedImage.asset("assets/imgs/pengsoo.jpeg"),
             Image.asset("assets/imgs/pengsoo.jpeg"),
             Container(height: 100, color: Colors.amber),
             Container(height: 100, color: Colors.green),
