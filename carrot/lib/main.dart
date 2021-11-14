@@ -8,7 +8,26 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: "Flutter Demo", theme: ThemeData(), home: SplashScreen());
+    return FutureBuilder(
+        future: Future.delayed(Duration(seconds: 3), () => 100),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print("error occur while loading.");
+          } else if (snapshot.hasData) {
+            return TomatoApp();
+          } else {
+            return SplashScreen();
+          }
+          return SplashScreen();
+        });
+  }
+}
+
+class TomatoApp extends StatelessWidget {
+  const TomatoApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.amber);
   }
 }
