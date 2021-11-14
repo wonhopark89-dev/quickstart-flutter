@@ -11,15 +11,21 @@ class MyApp extends StatelessWidget {
     return FutureBuilder(
         future: Future.delayed(Duration(seconds: 3), () => 100),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print("error occur while loading.");
-          } else if (snapshot.hasData) {
-            return TomatoApp();
-          } else {
-            return SplashScreen();
-          }
-          return SplashScreen();
+          return AnimatedSwitcher(
+              duration: Duration(milliseconds: 500),
+              child: _splashLoadWidget(snapshot));
         });
+  }
+
+  StatelessWidget _splashLoadWidget(AsyncSnapshot<Object?> snapshot) {
+    if (snapshot.hasError) {
+      print("error occur while loading.");
+      return Text("Error occur");
+    } else if (snapshot.hasData) {
+      return TomatoApp();
+    } else {
+      return SplashScreen();
+    }
   }
 }
 
