@@ -1,7 +1,9 @@
 import 'package:carrot/splash_screen.dart';
 import 'package:flutter/material.dart';
+import "package:carrot/uilts/logger.dart";
 
 void main() {
+  logger.d("Start App");
   runApp(MyApp());
 }
 
