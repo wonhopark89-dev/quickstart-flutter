@@ -1,3 +1,8 @@
+# ᕦ(ò_óˇ)ᕤ  
+
+```
+Beamer = Navigator 2 를 조금 쉽게 접근 할 수 있는 라이브러리
+```
 # carrot
 
 carrot market
