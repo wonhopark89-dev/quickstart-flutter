@@ -1,3 +1,4 @@
+import 'package:carrot/start/intro_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -6,7 +7,14 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Auth screen")),
+      body: PageView(
+        children: [
+          IntroPage(),
+          Container(color: Colors.blueAccent),
+          Container(color: Colors.cyan),
+          Container(color: Colors.accents[3])
+        ],
+      ),
     );
   }
 }
