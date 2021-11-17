@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import "package:carrot/uilts/logger.dart";
 
 // 글로벌로 설정해야함 ( 라우팅 관련 Beamer 에 위임 )
-final _routerDelegate = BeamerDelegate(
-    locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
+final _routerDelegate = BeamerDelegate(guards: [
+  BeamGuard(
+      pathBlueprints: ["/"],
+      check: (context, location) {
+        return false;
+      })
+], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
 
 void main() {
   logger.d("Start App");
