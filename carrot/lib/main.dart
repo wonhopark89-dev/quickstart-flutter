@@ -1,16 +1,19 @@
 import 'package:beamer/beamer.dart';
 import 'package:carrot/router/locations.dart';
+import 'package:carrot/screens/auth_screen.dart';
 import 'package:carrot/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import "package:carrot/uilts/logger.dart";
 
 // 글로벌로 설정해야함 ( 라우팅 관련 Beamer 에 위임 )
+// 로그인 안되어있으면(false) AuthScreen 으로
 final _routerDelegate = BeamerDelegate(guards: [
   BeamGuard(
       pathBlueprints: ["/"],
       check: (context, location) {
         return false;
-      })
+      },
+      showPage: BeamPage(child: AuthScreen()))
 ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
 
 void main() {
