@@ -1,3 +1,4 @@
+import 'package:carrot/start/address_page.dart';
 import 'package:carrot/start/intro_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class AuthScreen extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         children: [
           IntroPage(_pageController),
-          Container(color: Colors.blueAccent),
+          AddressPage(),
           Container(color: Colors.cyan),
           Container(color: Colors.accents[3])
         ],
