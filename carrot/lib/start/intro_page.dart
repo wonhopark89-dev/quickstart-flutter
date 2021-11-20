@@ -3,9 +3,12 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
-  const IntroPage({Key? key}) : super(key: key);
+  PageController controller;
+  IntroPage(this.controller, {Key? key}) : super(key: key);
 
   void onButtonClick() {
+    controller.animateToPage(1,
+        duration: Duration(milliseconds: 500), curve: Curves.ease);
     logger.d("on button clicked");
   }
 

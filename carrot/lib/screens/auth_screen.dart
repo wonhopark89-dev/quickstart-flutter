@@ -2,14 +2,19 @@ import 'package:carrot/start/intro_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  AuthScreen({Key? key}) : super(key: key);
+
+  // viewportFraction : width 비율
+  PageController _pageController = PageController(viewportFraction: 1.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
-          IntroPage(),
+          IntroPage(_pageController),
           Container(color: Colors.blueAccent),
           Container(color: Colors.cyan),
           Container(color: Colors.accents[3])
