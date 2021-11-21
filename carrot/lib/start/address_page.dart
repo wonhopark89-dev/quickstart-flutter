@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,9 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.all(16),
+      minimum: EdgeInsets.only(left: 16, right: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
             decoration: InputDecoration(
@@ -25,24 +27,35 @@ class AddressPage extends StatelessWidget {
                 border: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blueGrey))),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextButton.icon(
-                icon: Icon(
-                  CupertinoIcons.compass,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                onPressed: () {},
-                label: Text(
-                  "현재 위치 찾기",
-                  style: Theme.of(context).textTheme.button,
-                ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor),
-              ),
-            ],
+          TextButton.icon(
+            icon: Icon(
+              CupertinoIcons.compass,
+              color: Colors.white,
+              size: 20,
+            ),
+            onPressed: () {},
+            label: Text(
+              "현재 위치 찾기",
+              style: Theme.of(context).textTheme.button,
+            ),
+            style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                minimumSize: Size(10, 48)),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(Icons.image),
+                  trailing:
+                      ExtendedImage.asset("assets/imgs/carrot_bunny.jpeg"),
+                  title: Text("address $index"),
+                  subtitle: Text("sub $index"),
+                );
+              },
+              itemCount: 20,
+            ),
           )
         ],
       ),
