@@ -1,9 +1,10 @@
 import 'package:carrot/start/address_page.dart';
+import 'package:carrot/start/auth_page.dart';
 import 'package:carrot/start/intro_page.dart';
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatelessWidget {
-  AuthScreen({Key? key}) : super(key: key);
+class StartScreen extends StatelessWidget {
+  StartScreen({Key? key}) : super(key: key);
 
   // viewportFraction : width 비율
   PageController _pageController = PageController(viewportFraction: 1.0);
@@ -13,11 +14,11 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
+        // physics: NeverScrollableScrollPhysics(),
         children: [
           IntroPage(_pageController),
           AddressPage(),
-          Container(color: Colors.cyan),
+          AuthPage(),
           Container(color: Colors.accents[3])
         ],
       ),
