@@ -9,72 +9,93 @@ class AuthPage extends StatelessWidget {
   final inputBorder =
       const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey));
 
-  TextEditingController _textEditingController =
+  TextEditingController _phoneNumberController =
       TextEditingController(text: "010");
+
+  TextEditingController _codeController = TextEditingController();
+
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "전화번호 로그인",
-              style: Theme.of(context).appBarTheme.titleTextStyle,
+        return Form(
+          key: _formkey,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "전화번호 로그인",
+                style: Theme.of(context).appBarTheme.titleTextStyle,
+              ),
             ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(common_padding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    ExtendedImage.asset(
-                      "assets/imgs/carrot_bunny.jpeg",
-                      width: size.width * 0.15,
-                      height: size.width * 0.15,
-                    ),
-                    SizedBox(
-                      width: common_small_padding,
-                    ),
-                    Text(
-                      "당근마켓은 휴대폰 번호로 가입해요.\n번호는 안전하게 보관 되며\n어디에도 공개되지 않아요.",
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: common_padding,
-                ),
-                TextFormField(
-                  controller: _textEditingController,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [MaskedInputFormatter("000 0000 0000")],
-                  decoration: InputDecoration(
-                      focusedBorder: inputBorder, border: inputBorder),
-                ),
-                SizedBox(
-                  height: common_small_padding,
-                ),
-                TextButton(onPressed: () {}, child: Text("인증문자 발송")),
-                SizedBox(
-                  height: common_padding,
-                ),
-                TextFormField(
-                  controller: _textEditingController,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [MaskedInputFormatter("000 0000 0000")],
-                  decoration: InputDecoration(
-                      focusedBorder: inputBorder, border: inputBorder),
-                ),
-                SizedBox(
-                  height: common_small_padding,
-                ),
-                TextButton(onPressed: () {}, child: Text("인증번호"))
-              ],
+            body: Padding(
+              padding: const EdgeInsets.all(common_padding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      ExtendedImage.asset(
+                        "assets/imgs/carrot_bunny.jpeg",
+                        width: size.width * 0.15,
+                        height: size.width * 0.15,
+                      ),
+                      SizedBox(
+                        width: common_small_padding,
+                      ),
+                      Text(
+                        "당근마켓은 휴대폰 번호로 가입해요.\n번호는 안전하게 보관 되며\n어디에도 공개되지 않아요.",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: common_padding,
+                  ),
+                  TextFormField(
+                    controller: _phoneNumberController,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [MaskedInputFormatter("000 0000 0000")],
+                    decoration: InputDecoration(
+                        focusedBorder: inputBorder, border: inputBorder),
+                    validator: (phoneNumber) {
+                      if (phoneNumber != null && phoneNumber.length == 13) {
+                        return null;
+                      } else {
+                        // error
+                        // 리턴값이 에러메시지
+                        return "전화번호를 올바르게 입력해주세요.";
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: common_small_padding,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        if (_formkey.currentState != null) {
+                          bool passed = _formkey.currentState!.validate();
+                        }
+                      },
+                      child: Text("인증문자 발송")),
+                  SizedBox(
+                    height: common_padding,
+                  ),
+                  TextFormField(
+                    controller: _codeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [MaskedInputFormatter("000000")],
+                    decoration: InputDecoration(
+                        focusedBorder: inputBorder, border: inputBorder),
+                  ),
+                  SizedBox(
+                    height: common_small_padding,
+                  ),
+                  TextButton(onPressed: () {}, child: Text("인증번호"))
+                ],
+              ),
             ),
           ),
         );
