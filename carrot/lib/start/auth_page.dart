@@ -1,11 +1,19 @@
 import 'package:carrot/constants/common_size.dart';
+import 'package:carrot/uilts/logger.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
 
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+const duration = Duration(milliseconds: 500);
+
+class _AuthPageState extends State<AuthPage> {
   final inputBorder =
       const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey));
 
@@ -15,6 +23,8 @@ class AuthPage extends StatelessWidget {
   TextEditingController _codeController = TextEditingController();
 
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  VerificationStatus _verificationStatus = VerificationStatus.none;
 
   @override
   Widget build(BuildContext context) {
@@ -77,23 +87,41 @@ class AuthPage extends StatelessWidget {
                       onPressed: () {
                         if (_formkey.currentState != null) {
                           bool passed = _formkey.currentState!.validate();
+                          if (passed) {
+                            setState(() {
+                              _verificationStatus = VerificationStatus.codeSent;
+                            });
+                          }
                         }
                       },
                       child: Text("인증문자 발송")),
                   SizedBox(
                     height: common_padding,
                   ),
-                  TextFormField(
-                    controller: _codeController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [MaskedInputFormatter("000000")],
-                    decoration: InputDecoration(
-                        focusedBorder: inputBorder, border: inputBorder),
+                  AnimatedOpacity(
+                    duration: duration,
+                    curve: Curves.easeInOut,
+                    opacity: (_verificationStatus == VerificationStatus.none)
+                        ? 0
+                        : 1,
+                    child: AnimatedContainer(
+                      duration: duration,
+                      curve: Curves.easeInOut,
+                      height: getVerificationHeight(_verificationStatus),
+                      child: TextFormField(
+                        controller: _codeController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [MaskedInputFormatter("000000")],
+                        decoration: InputDecoration(
+                            focusedBorder: inputBorder, border: inputBorder),
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: common_small_padding,
-                  ),
-                  TextButton(onPressed: () {}, child: Text("인증번호"))
+                  AnimatedContainer(
+                      duration: duration,
+                      curve: Curves.easeInOut,
+                      height: getVerificationBtnHeight(_verificationStatus),
+                      child: TextButton(onPressed: () {}, child: Text("인증")))
                 ],
               ),
             ),
@@ -102,4 +130,33 @@ class AuthPage extends StatelessWidget {
       },
     );
   }
+
+  double getVerificationHeight(VerificationStatus status) {
+    switch (status) {
+      case VerificationStatus.none:
+        return 0;
+      case VerificationStatus.codeSent:
+      case VerificationStatus.verifying:
+      case VerificationStatus.verificationDone:
+        return 60 + common_small_padding;
+    }
+  }
+
+  double getVerificationBtnHeight(VerificationStatus status) {
+    switch (status) {
+      case VerificationStatus.none:
+        return 0;
+      case VerificationStatus.codeSent:
+      case VerificationStatus.verifying:
+      case VerificationStatus.verificationDone:
+        return 48;
+    }
+  }
+}
+
+enum VerificationStatus {
+  none,
+  codeSent,
+  verifying,
+  verificationDone,
 }
