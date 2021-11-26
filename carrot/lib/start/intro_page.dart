@@ -1,7 +1,9 @@
 import 'package:carrot/constants/common_size.dart';
+import 'package:carrot/states/user_provider.dart';
 import 'package:carrot/uilts/logger.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import "package:provider/provider.dart"; // read 에 필요함
 
 class IntroPage extends StatelessWidget {
   PageController controller;
@@ -15,6 +17,8 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 내가 속한 상위에 Provider 접근 가능함. 불필요하게 큰 범위에 Provider 사용 시 리렌더링이 낭비됨.
+    logger.d("current user stateL ${context.read<UserProvider>().userState}");
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
