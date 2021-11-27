@@ -1,6 +1,7 @@
 import 'package:carrot/constants/common_size.dart';
 import 'package:carrot/states/user_provider.dart';
 import 'package:carrot/uilts/logger.dart';
+import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart"; // read 에 필요함
@@ -63,7 +64,12 @@ class IntroPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextButton(
-                      onPressed: onButtonClick,
+                      // onPressed: onButtonClick,
+                      onPressed: () async {
+                        var response =
+                            await Dio().get("https://randomuser.me/api/");
+                        logger.d(response);
+                      },
                       child: Text(
                         "내 동네 설정하고 시작하기",
                         style: Theme.of(context).textTheme.button,
