@@ -3,6 +3,8 @@ import 'package:carrot/uilts/logger.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:carrot/states/user_provider.dart';
+import "package:provider/provider.dart";
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -90,12 +92,16 @@ class _AuthPageState extends State<AuthPage> {
                         onPressed: () {
                           if (_formkey.currentState != null) {
                             bool passed = _formkey.currentState!.validate();
-                            if (passed) {
-                              setState(() {
-                                _verificationStatus =
-                                    VerificationStatus.codeSent;
-                              });
-                            }
+                            // todo :fix
+                            // if (passed) {
+                            //   setState(() {
+                            //     _verificationStatus =
+                            //         VerificationStatus.codeSent;
+                            //   });
+                            // }
+                            setState(() {
+                              _verificationStatus = VerificationStatus.codeSent;
+                            });
                           }
                         },
                         child: Text("인증문자 발송")),
@@ -182,6 +188,8 @@ class _AuthPageState extends State<AuthPage> {
     setState(() {
       _verificationStatus = VerificationStatus.verificationDone;
     });
+    // 로그인을 성공(true)으로 바꿔줌
+    context.read<UserProvider>().setUserAuth(true);
   }
 }
 

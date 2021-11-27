@@ -13,7 +13,7 @@ final _routerDelegate = BeamerDelegate(guards: [
   BeamGuard(
       pathBlueprints: ["/"],
       check: (context, location) {
-        return false;
+        return context.watch<UserProvider>().userState; // notify 를 받을 수 있음
       },
       showPage: BeamPage(child: StartScreen()))
 ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
@@ -58,22 +58,25 @@ class TomatoApp extends StatelessWidget {
       },
       child: MaterialApp.router(
         theme: ThemeData(
-            primarySwatch: Colors.deepOrange,
-            fontFamily: "DoHyeon",
-            hintColor: Colors.grey[400],
-            textTheme: TextTheme(
-                headline3: TextStyle(fontFamily: "DoHyeon"),
-                button: TextStyle(color: Colors.white)),
-            textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.deepOrange,
-                    primary: Colors.white,
-                    minimumSize: Size(48, 48))),
-            appBarTheme: AppBarTheme(
-                backgroundColor: Colors.white,
-                elevation: 2,
-                titleTextStyle:
-                    TextStyle(color: Colors.black87, fontFamily: "DoHyeon"))),
+          primarySwatch: Colors.deepOrange,
+          fontFamily: "DoHyeon",
+          hintColor: Colors.grey[400],
+          textTheme: TextTheme(
+              headline3: TextStyle(fontFamily: "DoHyeon"),
+              button: TextStyle(color: Colors.white)),
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.deepOrange,
+                  primary: Colors.white,
+                  minimumSize: Size(48, 48))),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            elevation: 2,
+            titleTextStyle:
+                TextStyle(color: Colors.black87, fontFamily: "DoHyeon"),
+            actionsIconTheme: IconThemeData(color: Colors.black87),
+          ),
+        ),
         routeInformationParser: BeamerParser(),
         routerDelegate: _routerDelegate,
       ),
