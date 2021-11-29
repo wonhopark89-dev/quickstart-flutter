@@ -65,11 +65,7 @@ class IntroPage extends StatelessWidget {
                   children: [
                     TextButton(
                       // onPressed: onButtonClick,
-                      onPressed: () async {
-                        var response =
-                            await Dio().get("https://randomuser.me/api/");
-                        logger.d(response);
-                      },
+                      onPressed: () {},
                       child: Text(
                         "내 동네 설정하고 시작하기",
                         style: Theme.of(context).textTheme.button,
