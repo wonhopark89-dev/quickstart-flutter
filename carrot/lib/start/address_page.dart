@@ -5,7 +5,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-
 import 'address_service.dart';
 
 class AddressPage extends StatefulWidget {
@@ -78,6 +77,8 @@ class _AddressPageState extends State<AddressPage> {
 
               _locationData = await location.getLocation();
               logger.d(_locationData);
+              AddressService().findAddressByCoordinate(
+                  long: _locationData.longitude!, lat: _locationData.latitude!);
             },
             label: Text(
               "현재 위치 찾기",

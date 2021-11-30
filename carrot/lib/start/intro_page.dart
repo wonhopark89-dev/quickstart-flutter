@@ -19,7 +19,7 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 내가 속한 상위에 Provider 접근 가능함. 불필요하게 큰 범위에 Provider 사용 시 리렌더링이 낭비됨.
-    logger.d("current user stateL ${context.read<UserProvider>().userState}");
+    logger.d("current user state ${context.read<UserProvider>().userState}");
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
