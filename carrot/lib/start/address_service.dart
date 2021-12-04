@@ -1,4 +1,5 @@
 import 'package:carrot/data/address_model.dart';
+import 'package:carrot/data/address_model2.dart';
 import 'package:carrot/uilts/logger.dart';
 import "package:carrot/constants/keys.dart";
 import 'package:dio/dio.dart';
@@ -34,7 +35,7 @@ class AddressService {
     return addressModel;
   }
 
-  Future<void> findAddressByCoordinate(
+  Future<List<AddressModel2>> findAddressByCoordinate(
       {required double long, required double lat}) async {
     final List<Map<String, dynamic>> formDatas = <Map<String, dynamic>>[];
 
@@ -78,15 +79,25 @@ class AddressService {
       "type": "BOTH",
     });
 
+    List<AddressModel2> addresses = [];
+
     for (Map<String, dynamic> formData in formDatas) {
       final response = await Dio()
           .get("http://api.vworld.kr/req/address", queryParameters: formData)
           .catchError((e) {
         logger.e(e.mesage);
       });
+
+      AddressModel2 addressModel =
+          AddressModel2.fromJson(response.data["response"]);
+
+      if (response.data["status"] == "OK") {
+        addresses.add(addressModel);
+      }
+
       logger.d(response);
     }
 
-    return;
+    return addresses;
   }
 }
