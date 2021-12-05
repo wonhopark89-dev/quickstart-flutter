@@ -44,7 +44,7 @@ class AddressService {
       "service": "address",
       "request": "getAddress",
       "point": "$long,$lat",
-      "type": "BOTH",
+      "type": "PARCEL",
     });
 
     formDatas.add({
@@ -52,7 +52,7 @@ class AddressService {
       "service": "address",
       "request": "getAddress",
       "point": "${long - 0.01},$lat",
-      "type": "BOTH",
+      "type": "PARCEL",
     });
 
     formDatas.add({
@@ -60,7 +60,7 @@ class AddressService {
       "service": "address",
       "request": "getAddress",
       "point": "${long + 0.01},$lat",
-      "type": "BOTH",
+      "type": "PARCEL",
     });
 
     formDatas.add({
@@ -68,7 +68,7 @@ class AddressService {
       "service": "address",
       "request": "getAddress",
       "point": "$long,${lat - 0.01}",
-      "type": "BOTH",
+      "type": "PARCEL",
     });
 
     formDatas.add({
@@ -76,7 +76,7 @@ class AddressService {
       "service": "address",
       "request": "getAddress",
       "point": "$long,${lat + 0.01}",
-      "type": "BOTH",
+      "type": "PARCEL",
     });
 
     List<AddressModel2> addresses = [];
@@ -85,19 +85,19 @@ class AddressService {
       final response = await Dio()
           .get("http://api.vworld.kr/req/address", queryParameters: formData)
           .catchError((e) {
-        logger.e(e.mesage);
+        // logger.e(e.mesage);
       });
 
       AddressModel2 addressModel =
           AddressModel2.fromJson(response.data["response"]);
 
-      if (response.data["status"] == "OK") {
+      if (response.data["response"]["status"] == "OK") {
         addresses.add(addressModel);
       }
-
-      logger.d(response);
+      // logger.d(response);
     }
 
+    logger.d("return: ${addresses.length}");
     return addresses;
   }
 }
