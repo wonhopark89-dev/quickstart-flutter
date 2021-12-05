@@ -18,6 +18,7 @@ class _AddressPageState extends State<AddressPage> {
   TextEditingController _addressController = TextEditingController();
 
   AddressModel? _addressmodel;
+  bool _isGettingLocation = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +48,18 @@ class _AddressPageState extends State<AddressPage> {
                     borderSide: BorderSide(color: Colors.blueGrey))),
           ),
           TextButton.icon(
-            icon: Icon(
-              CupertinoIcons.compass,
-              color: Colors.white,
-              size: 20,
-            ),
+            icon: _isGettingLocation
+                ? CircularProgressIndicator()
+                : Icon(
+                    CupertinoIcons.compass,
+                    color: Colors.white,
+                    size: 20,
+                  ),
             onPressed: () async {
+              setState(() {
+                _isGettingLocation = true;
+              });
+
               Location location = new Location();
 
               bool _serviceEnabled;
@@ -79,9 +86,13 @@ class _AddressPageState extends State<AddressPage> {
               logger.d(_locationData);
               AddressService().findAddressByCoordinate(
                   long: _locationData.longitude!, lat: _locationData.latitude!);
+
+              setState(() {
+                _isGettingLocation = false;
+              });
             },
             label: Text(
-              "현재 위치 찾기",
+              _isGettingLocation ? "위치정보 가져오는 중..." : "현재 위치 찾기",
               style: Theme.of(context).textTheme.button,
             ),
           ),
