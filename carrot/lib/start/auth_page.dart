@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:carrot/states/user_provider.dart';
 import "package:provider/provider.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -90,19 +91,20 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          if (_formkey.currentState != null) {
-                            bool passed = _formkey.currentState!.validate();
-                            // todo :fix
-                            // if (passed) {
-                            //   setState(() {
-                            //     _verificationStatus =
-                            //         VerificationStatus.codeSent;
-                            //   });
-                            // }
-                            setState(() {
-                              _verificationStatus = VerificationStatus.codeSent;
-                            });
-                          }
+                          _getAddress();
+                          // if (_formkey.currentState != null) {
+                          //   bool passed = _formkey.currentState!.validate();
+                          //   todo :fix
+                          //   if (passed) {
+                          //     setState(() {
+                          //       _verificationStatus =
+                          //           VerificationStatus.codeSent;
+                          //     });
+                          //   }
+                          //   setState(() {
+                          //     _verificationStatus = VerificationStatus.codeSent;
+                          //   });
+                          // }
                         },
                         child: Text("인증문자 발송")),
                     SizedBox(
@@ -190,6 +192,12 @@ class _AuthPageState extends State<AuthPage> {
     });
     // 로그인을 성공(true)으로 바꿔줌
     context.read<UserProvider>().setUserAuth(true);
+  }
+
+  _getAddress() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String address = prefs.getString("address") ?? ""; // null 될수 있음
+    logger.d(address);
   }
 }
 

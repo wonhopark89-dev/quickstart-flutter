@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.0.1
   dio: ^4.0.4
   location: ^4.3.0
+  shared_preferences: ^2.0.9
 
 dev_dependencies:
   flutter_test:

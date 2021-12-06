@@ -6,6 +6,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'address_service.dart';
 
 class AddressPage extends StatefulWidget {
@@ -127,6 +128,11 @@ class _AddressPageState extends State<AddressPage> {
                     return Container();
                   }
                   return ListTile(
+                    onTap: () {
+                      _saveAddressOnSharedPreference(
+                          _addressModel!.result!.items![index].address!.road ??
+                              "");
+                    },
                     // leading: Icon(Icons.image),
                     // trailing:
                     //     ExtendedImage.asset("assets/imgs/carrot_bunny.jpeg"),
@@ -156,6 +162,10 @@ class _AddressPageState extends State<AddressPage> {
                     return Container();
                   }
                   return ListTile(
+                    onTap: () {
+                      _saveAddressOnSharedPreference(
+                          _addressModel2List[index].result![0].text ?? "");
+                    },
                     // leading: Icon(Icons.image),
                     // trailing:
                     //     ExtendedImage.asset("assets/imgs/carrot_bunny.jpeg"),
@@ -171,5 +181,10 @@ class _AddressPageState extends State<AddressPage> {
         ],
       ),
     );
+  }
+
+  _saveAddressOnSharedPreference(String address) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('address', address);
   }
 }
