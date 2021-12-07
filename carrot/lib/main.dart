@@ -20,6 +20,8 @@ final _routerDelegate = BeamerDelegate(guards: [
 
 void main() {
   logger.d("Start App");
+  // 기본 프로바이더 사용 시 나타나는 에러 방지
+  Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
 }
 

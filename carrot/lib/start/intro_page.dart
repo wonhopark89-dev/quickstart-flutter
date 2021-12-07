@@ -7,14 +7,7 @@ import 'package:flutter/material.dart';
 import "package:provider/provider.dart"; // read 에 필요함
 
 class IntroPage extends StatelessWidget {
-  PageController controller;
-  IntroPage(this.controller, {Key? key}) : super(key: key);
-
-  void onButtonClick() {
-    controller.animateToPage(1,
-        duration: Duration(milliseconds: 500), curve: Curves.ease);
-    logger.d("on button clicked");
-  }
+  IntroPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +57,11 @@ class IntroPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextButton(
-                      // onPressed: onButtonClick,
-                      onPressed: () {},
+                      onPressed: () async {
+                        context.read<PageController>().animateToPage(1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.ease);
+                      },
                       child: Text(
                         "내 동네 설정하고 시작하기",
                         style: Theme.of(context).textTheme.button,

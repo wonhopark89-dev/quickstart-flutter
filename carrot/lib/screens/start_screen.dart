@@ -2,6 +2,7 @@ import 'package:carrot/start/address_page.dart';
 import 'package:carrot/start/auth_page.dart';
 import 'package:carrot/start/intro_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class StartScreen extends StatelessWidget {
   StartScreen({Key? key}) : super(key: key);
@@ -11,16 +12,18 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        // physics: NeverScrollableScrollPhysics(),
-        children: [
-          IntroPage(_pageController),
-          AddressPage(),
-          AuthPage(),
-          Container(color: Colors.accents[3])
-        ],
+    return Provider<PageController>.value(
+      value: _pageController,
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          // physics: NeverScrollableScrollPhysics(),
+          children: [
+            IntroPage(),
+            AddressPage(),
+            AuthPage(),
+          ],
+        ),
       ),
     );
   }
