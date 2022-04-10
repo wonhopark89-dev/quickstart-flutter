@@ -1,6 +1,7 @@
 # counter_app
 
 A new Flutter project.
+with Flutter in Action
 
 ## Getting Started
 
