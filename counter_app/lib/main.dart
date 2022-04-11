@@ -102,9 +102,20 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            ElevatedButton(
-              child: const Text('Decrement Counter'),
-              onPressed: _decrementCounter,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  child: const Text('Decrement'),
+                  onPressed: _decrementCounter,
+                  style: ElevatedButton.styleFrom(primary: Colors.deepOrange),
+                ),
+                ElevatedButton(
+                  child: const Text('Increment'),
+                  onPressed: _incrementCoounter,
+                  style: ElevatedButton.styleFrom(primary: Colors.lightGreen),
+                ),
+              ],
             )
           ],
         ),
@@ -119,5 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _decrementCounter() {
     setState(() => _counter--);
+  }
+
+  void _incrementCoounter() {
+    setState(() => _counter++);
   }
 }
