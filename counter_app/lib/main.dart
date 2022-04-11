@@ -102,6 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            ElevatedButton(
+              child: const Text('Decrement Counter'),
+              onPressed: _decrementCounter,
+            )
           ],
         ),
       ),
@@ -111,5 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _decrementCounter() {
+    setState(() => _counter--);
   }
 }
