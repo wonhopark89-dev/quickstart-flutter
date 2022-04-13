@@ -77,16 +77,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(bottom: 50.0),
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.25),
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-              child: Image.asset(
-                'images/bono.jpeg',
-                width: 100.0,
+            GestureDetector(
+              onDoubleTap: () {
+                setState(() {
+                  _counter = _counter + 2;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 50.0),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: Image.asset(
+                  'images/bono.jpeg',
+                  width: 100.0,
+                ),
               ),
             ),
             const Text(
