@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:email_auth/pages/auth_page.dart';
@@ -32,8 +33,9 @@ class _MyHomeState extends State<MyHome> {
           IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
-                Provider.of<PageNotifier>(context, listen: false)
-                    .showPage(AuthPage.pageName);
+                FirebaseAuth.instance.signOut();
+                // Provider.of<PageNotifier>(context, listen: false)
+                //     .showPage(AuthPage.pageName);
               })
         ],
       ),
