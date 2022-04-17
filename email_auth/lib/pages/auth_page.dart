@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:email_auth/provider/page_notifier.dart';
@@ -71,8 +72,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                       duration: _duration,
                       height: isRegister ? 60 : 0,
                       curve: _curve,
-                      child: _textFormField(
-                          _confirmController, 'Confirm Password')),
+                      child: _textFormField(_confirmController, 'Confirm Password')),
                   const SizedBox(
                     height: 24,
                   ),
@@ -90,20 +90,17 @@ class _AuthWidgetState extends State<AuthWidget> {
                       _socialLogin(
                           assetLoction: 'assets/icons8-google-48.png',
                           onPress: () {
-                            Provider.of<PageNotifier>(context, listen: false)
-                                .goToMain();
+                            Provider.of<PageNotifier>(context, listen: false).goToMain();
                           }),
                       _socialLogin(
                           assetLoction: 'assets/icons8-facebook-48.png',
                           onPress: () {
-                            Provider.of<PageNotifier>(context, listen: false)
-                                .goToMain();
+                            Provider.of<PageNotifier>(context, listen: false).goToMain();
                           }),
                       _socialLogin(
                           assetLoction: 'assets/icons8-apple-logo-48.png',
                           onPress: () {
-                            Provider.of<PageNotifier>(context, listen: false)
-                                .goToMain();
+                            Provider.of<PageNotifier>(context, listen: false).goToMain();
                           }),
                     ],
                   )
@@ -116,16 +113,12 @@ class _AuthWidgetState extends State<AuthWidget> {
     );
   }
 
-  Container _socialLogin(
-      {required String assetLoction, required Function onPress}) {
+  Container _socialLogin({required String assetLoction, required Function onPress}) {
     return Container(
       width: 50,
       height: 50,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25), color: Colors.white54),
-      child: IconButton(
-          icon: ImageIcon(AssetImage(assetLoction)),
-          onPressed: () => onPress()),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.white54),
+      child: IconButton(icon: ImageIcon(AssetImage(assetLoction)), onPressed: () => onPress()),
     );
   }
 
@@ -138,10 +131,8 @@ class _AuthWidgetState extends State<AuthWidget> {
       },
       color: Colors.transparent,
       textColor: isRegister ? Colors.black87 : Colors.black54,
-      child: Text('Register',
-          style: TextStyle(
-              fontSize: 18,
-              fontWeight: isRegister ? FontWeight.w600 : FontWeight.w500)),
+      child:
+          Text('Register', style: TextStyle(fontSize: 18, fontWeight: isRegister ? FontWeight.w600 : FontWeight.w500)),
     );
   }
 
@@ -154,10 +145,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       },
       color: Colors.transparent,
       textColor: isRegister ? Colors.black54 : Colors.black87,
-      child: Text('Login',
-          style: TextStyle(
-              fontSize: 18,
-              fontWeight: isRegister ? FontWeight.w500 : FontWeight.w600)),
+      child: Text('Login', style: TextStyle(fontSize: 18, fontWeight: isRegister ? FontWeight.w500 : FontWeight.w600)),
     );
   }
 
@@ -168,14 +156,12 @@ class _AuthWidgetState extends State<AuthWidget> {
       obscureText: controller != _emailController,
       style: const TextStyle(color: Colors.white),
       validator: (text) {
-        if (controller != _confirmController &&
-            (text == null || text.isEmpty)) {
+        if (controller != _confirmController && (text == null || text.isEmpty)) {
           return "Please input something!!";
         }
 
         if (controller == _confirmController && isRegister) {
-          if ((text == null || text.isEmpty) ||
-              text != _passwordController.text) {
+          if ((text == null || text.isEmpty) || text != _passwordController.text) {
             return "Password you input does not match.";
           }
         }
@@ -190,8 +176,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(radiusSize),
             borderSide: const BorderSide(color: Colors.black, width: 3)),
-        errorStyle:
-            const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        errorStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         filled: true,
         fillColor: Colors.black45,
         border: OutlineInputBorder(
@@ -209,13 +194,16 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   Widget _loginButton(BuildContext context) {
     return FlatButton(
-      onPressed: () {
+      onPressed: () async {
         if (_formKey.currentState!.validate()) {
-          Provider.of<PageNotifier>(context, listen: false).goToMain();
+          if (isRegister) {
+            UserCredential userCredential = await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+          } else {}
+          // Provider.of<PageNotifier>(context, listen: false).goToMain();
         }
       },
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusSize)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusSize)),
       padding: const EdgeInsets.all(16),
       color: Colors.white54,
       textColor: Colors.black87,
