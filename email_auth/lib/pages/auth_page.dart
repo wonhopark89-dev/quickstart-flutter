@@ -31,6 +31,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   final _curve = Curves.fastOutSlowIn;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
@@ -48,6 +49,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         )),
         child: SafeArea(
           child: Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Colors.transparent,
             body: Form(
               key: _formKey,
@@ -197,8 +199,25 @@ class _AuthWidgetState extends State<AuthWidget> {
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
           if (isRegister) {
-            UserCredential userCredential = await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+            // create user
+            try {
+              UserCredential userCredential = await FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+            } on FirebaseAuthException catch (e) {
+              if (e.code == "email-already-in-use") {
+                SnackBar snackBar = const SnackBar(content: Text("해당 이메일은 이미 사용 중입니다."));
+                _scaffoldKey.currentState!.showSnackBar(snackBar);
+              } else if (e.code == "invalid-email") {
+                SnackBar snackBar = const SnackBar(content: Text("invalid-email"));
+                _scaffoldKey.currentState!.showSnackBar(snackBar);
+              } else if (e.code == "operate-not-allowed") {
+                SnackBar snackBar = const SnackBar(content: Text("operate-not-allowed"));
+                _scaffoldKey.currentState!.showSnackBar(snackBar);
+              } else if (e.code == "weak-password") {
+                SnackBar snackBar = const SnackBar(content: Text("weak-password"));
+                _scaffoldKey.currentState!.showSnackBar(snackBar);
+              }
+            }
           } else {}
           // Provider.of<PageNotifier>(context, listen: false).goToMain();
         }
