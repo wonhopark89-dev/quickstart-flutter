@@ -1,7 +1,4 @@
-# email_auth
-
-controller, state, Future, Provider...
-
+# instagram_v2
 
 A new Flutter project.
 
