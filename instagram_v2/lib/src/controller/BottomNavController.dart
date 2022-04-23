@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/message_popup.dart';
-import 'package:instagram_v2/src/pages/Upload.dart';
+import 'package:instagram_v2/src/pages/upload.dart';
 
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
 

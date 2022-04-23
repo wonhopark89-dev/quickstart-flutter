@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/controller/BottomNavController.dart';
+import 'package:instagram_v2/src/pages/home.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);
@@ -12,15 +13,10 @@ class App extends GetView<BottomNavController> {
       child: Obx(
         () => Scaffold(
           // backgroundColor: Colors.red,
-          appBar: AppBar(),
           body: IndexedStack(
             index: controller.pageIndex.value,
             children: [
-              Container(
-                child: const Center(
-                  child: Text("HOME"),
-                ),
-              ),
+              Home(),
               Container(
                 child: const Center(
                   child: Text("SEARCH"),
