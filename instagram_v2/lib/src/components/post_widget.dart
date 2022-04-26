@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_v2/src/components/avatar_widget.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
@@ -85,6 +86,18 @@ class PostWidget extends StatelessWidget {
           Text(
             "좋아요 99개",
             style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          ExpandableText(
+            "컨텐츠\n컨텐츠\n컨텐츠\n컨텐츠\n",
+            onPrefixTap: () {},
+            prefixText: "올리는 사람",
+            prefixStyle: TextStyle(fontWeight: FontWeight.bold),
+            expandText: "더보기",
+            collapseText: "접기",
+            maxLines: 3,
+            expandOnTextTap: true,
+            collapseOnTextTap: true,
+            linkColor: Colors.grey,
           )
         ],
       ),
@@ -102,7 +115,7 @@ class PostWidget extends StatelessWidget {
         _image(),
         const SizedBox(height: 15),
         _infoCount(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 5),
         _infoDescription(),
         // _replyTextBtn(),
         // _dateAgo(),
