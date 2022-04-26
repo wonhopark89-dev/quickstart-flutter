@@ -83,15 +83,15 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
+          const Text(
             "좋아요 99개",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           ExpandableText(
             "컨텐츠\n컨텐츠\n컨텐츠\n컨텐츠\n",
             onPrefixTap: () {},
             prefixText: "올리는 사람",
-            prefixStyle: TextStyle(fontWeight: FontWeight.bold),
+            prefixStyle: const TextStyle(fontWeight: FontWeight.bold),
             expandText: "더보기",
             collapseText: "접기",
             maxLines: 3,
@@ -104,12 +104,25 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  Widget _replyTextBtn() {
+    return GestureDetector(
+      onTap: () {},
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(
+          "댓글 999개 모두 보기",
+          style: TextStyle(color: Colors.grey, fontSize: 13),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       // color: Colors.red,
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         _header(),
         const SizedBox(height: 15),
         _image(),
@@ -117,7 +130,8 @@ class PostWidget extends StatelessWidget {
         _infoCount(),
         const SizedBox(height: 5),
         _infoDescription(),
-        // _replyTextBtn(),
+        const SizedBox(height: 5),
+        _replyTextBtn(),
         // _dateAgo(),
       ]),
     );
