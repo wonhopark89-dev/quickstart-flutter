@@ -76,6 +76,21 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  Widget _infoDescription() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "좋아요 99개",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,7 +102,8 @@ class PostWidget extends StatelessWidget {
         _image(),
         const SizedBox(height: 15),
         _infoCount(),
-        // _infoDescription(),
+        const SizedBox(height: 15),
+        _infoDescription(),
         // _replyTextBtn(),
         // _dateAgo(),
       ]),
