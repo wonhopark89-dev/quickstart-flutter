@@ -85,7 +85,7 @@ class PostWidget extends StatelessWidget {
         children: [
           const Text(
             "좋아요 99개",
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           ExpandableText(
             "컨텐츠\n컨텐츠\n컨텐츠\n컨텐츠\n",
@@ -117,6 +117,16 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  Widget _dateAgo() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Text(
+        "1일전",
+        style: TextStyle(color: Colors.grey, fontSize: 11),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,7 +142,8 @@ class PostWidget extends StatelessWidget {
         _infoDescription(),
         const SizedBox(height: 5),
         _replyTextBtn(),
-        // _dateAgo(),
+        const SizedBox(height: 5),
+        _dateAgo(),
       ]),
     );
   }
