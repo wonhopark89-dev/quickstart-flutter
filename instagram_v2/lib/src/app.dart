@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/controller/BottomNavController.dart';
 import 'package:instagram_v2/src/pages/home.dart';
+import 'package:instagram_v2/src/pages/search.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);
@@ -16,12 +17,8 @@ class App extends GetView<BottomNavController> {
           body: IndexedStack(
             index: controller.pageIndex.value,
             children: [
-              Home(),
-              Container(
-                child: const Center(
-                  child: Text("SEARCH"),
-                ),
-              ),
+              const Home(),
+              const Search(),
               Container(
                 child: const Center(
                   child: Text("UPLOAD"),
