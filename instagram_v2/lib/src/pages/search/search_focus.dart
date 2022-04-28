@@ -9,7 +9,49 @@ class SearchFocus extends StatefulWidget {
   State<SearchFocus> createState() => _SearchFocusState();
 }
 
-class _SearchFocusState extends State<SearchFocus> {
+class _SearchFocusState extends State<SearchFocus>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+  }
+
+  Widget _tabMenuOne(String menu) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: Text(
+        menu,
+        style: const TextStyle(fontSize: 15, color: Colors.black),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _tabMenu() {
+    return PreferredSize(
+      child: Container(
+        height: AppBar().preferredSize.height,
+        width: Size.infinite.width,
+        decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: Color(0xFFE4E4E4))),
+        ),
+        child: TabBar(
+            controller: _tabController,
+            indicatorColor: Colors.black,
+            tabs: [
+              _tabMenuOne("인기"),
+              _tabMenuOne("계정"),
+              _tabMenuOne("오디오"),
+              _tabMenuOne("태그"),
+              _tabMenuOne("장소")
+            ]),
+      ),
+      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +80,7 @@ class _SearchFocusState extends State<SearchFocus> {
                 isDense: true),
           ),
         ),
+        bottom: _tabMenu(),
       ),
       body: SafeArea(
           child: Column(
