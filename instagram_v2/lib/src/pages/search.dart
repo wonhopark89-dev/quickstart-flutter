@@ -1,7 +1,8 @@
 import 'dart:math';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiver/iterables.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -12,13 +13,22 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<List<int>> groupBox = [[], [], []];
+  List<int> groupIndex = [0, 0, 0];
 
   @override
   void initState() {
     super.initState();
     // 100 개 가정
     for (var i = 0; i < 100; i++) {
-      groupBox[i % 3].add(1);
+      // var gi = i % 3; // 앞에서 사이즈 큰지를 확인하지 못함
+      var gi = groupIndex.indexOf(min<int>(groupIndex)!);
+      var size = 1;
+      if (gi != 1) {
+        //  홀짝으로 2배 높이 주는 로직
+        size = Random().nextInt(100) % 2 == 0 ? 1 : 2;
+      }
+      groupBox[gi].add(size);
+      groupIndex[gi] += size;
     }
 
     print(groupBox);
@@ -69,6 +79,10 @@ class _SearchState extends State<Search> {
                       border: Border.all(color: Colors.white),
                       color: Colors.primaries[
                           Random().nextInt(Colors.primaries.length)]),
+                  child: CachedNetworkImage(
+                      imageUrl:
+                          "http://m.ebichu.co.kr/web/product/medium/20200227/9dc69754e4800cf4332225fb6fcaf37b.png",
+                      fit: BoxFit.cover),
                 ),
               ).toList(),
             ),
