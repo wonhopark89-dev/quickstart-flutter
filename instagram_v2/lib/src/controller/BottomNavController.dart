@@ -8,7 +8,12 @@ import 'package:instagram_v2/src/pages/upload.dart';
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
 
 class BottomNavController extends GetxController {
+  static BottomNavController get to => Get.find(); // for nested
+
   RxInt pageIndex = 0.obs;
+
+  GlobalKey<NavigatorState> searchPageNavigationKey =
+      GlobalKey<NavigatorState>();
 
   List<int> bottomHistory = [0];
 
@@ -59,6 +64,15 @@ class BottomNavController extends GetxController {
       );
       return true;
     } else {
+      var page = PageName.values[bottomHistory.last];
+      if (page == PageName.SEARCH) {
+        // serach 안에서 내부스택 쌓이는 걸 체크하는 방법
+        var value = await searchPageNavigationKey.currentState!.maybePop();
+        if (value) {
+          return false; // willPopAction 에서는 아무것도 안하겠다
+        }
+      }
+
       // print("goto before page!");
       bottomHistory.removeLast();
       var index = bottomHistory.last;

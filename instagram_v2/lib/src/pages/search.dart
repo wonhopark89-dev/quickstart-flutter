@@ -41,7 +41,14 @@ class _SearchState extends State<Search> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              Get.to(() => const SearchFocus());
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchFocus(),
+                  ));
+
+              // Navigator 안쪽이라 이방식을 쓰면 Nested 가 안됨, Bottom 이 살아 있지 않음
+              // Get.to(() => const SearchFocus());
             },
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
