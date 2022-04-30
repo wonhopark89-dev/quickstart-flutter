@@ -151,11 +151,17 @@ class _UploadState extends State<Upload> {
           imageList[index],
           200,
           builder: (data) {
-            return Opacity(
-              opacity: imageList[index] == selectedImage ? 0.3 : 1,
-              child: Image.memory(
-                data,
-                fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () {
+                selectedImage = imageList[index];
+                update();
+              },
+              child: Opacity(
+                opacity: imageList[index] == selectedImage ? 0.3 : 1,
+                child: Image.memory(
+                  data,
+                  fit: BoxFit.cover,
+                ),
               ),
             );
           },
