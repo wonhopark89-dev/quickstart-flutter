@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -90,14 +90,66 @@ class _UploadState extends State<Upload> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              children: [
-                Text(headerTitle,
-                    style: const TextStyle(color: Colors.black, fontSize: 18)),
-                const Icon(Icons.arrow_drop_down),
-              ],
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                ),
+                isScrollControlled: true,
+                // constraints: BoxConstraints(
+                //     maxHeight: MediaQuery.of(context).size.height -
+                //         MediaQuery.of(context).padding.top),
+                builder: (_) => Container(
+                  height: (albums.length > 10
+                          ? Size.infinite.height
+                          : albums.length * 60) +
+                      MediaQuery.of(context).padding.bottom,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black),
+                          width: 40,
+                          height: 4,
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: List.generate(
+                                albums.length,
+                                (index) => Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 20),
+                                      child: Text(albums[index].name),
+                                    )),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  Text(headerTitle,
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 18)),
+                  const Icon(Icons.arrow_drop_down),
+                ],
+              ),
             ),
           ),
           Row(
@@ -194,7 +246,9 @@ class _UploadState extends State<Upload> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
             child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: ImageData(IconsPath.closeImage))),
