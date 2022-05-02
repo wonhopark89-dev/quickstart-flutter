@@ -25,11 +25,12 @@ class MyPage extends StatelessWidget {
   }
 
   Widget _information() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const AvatarWidget(
@@ -52,8 +53,53 @@ class MyPage extends StatelessWidget {
               ),
             ],
           ),
-        )
-      ],
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "안녕하세요 자기소개 페이지 입니다. 구독과 좋아요",
+            style: TextStyle(fontSize: 13, color: Colors.black),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _menu() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(color: const Color(0xffdedede))),
+              child: const Text(
+                "Edit Profile",
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              border: Border.all(
+                color: const Color(0xffdedede),
+              ),
+              color: const Color(0xFFEFEFEF),
+            ),
+            child: ImageData(IconsPath.addFriend),
+          )
+        ],
+      ),
     );
   }
 
@@ -92,6 +138,7 @@ class MyPage extends StatelessWidget {
         child: Column(
           children: [
             _information(),
+            _menu(),
           ],
         ),
       ),
