@@ -4,6 +4,7 @@ import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/controller/BottomNavController.dart';
 import 'package:instagram_v2/src/pages/active_history.dart';
 import 'package:instagram_v2/src/pages/home.dart';
+import 'package:instagram_v2/src/pages/mypage.dart';
 import 'package:instagram_v2/src/pages/search.dart';
 import 'package:instagram_v2/src/pages/upload.dart';
 
@@ -30,11 +31,7 @@ class App extends GetView<BottomNavController> {
               ),
               const Upload(),
               const ActiveHistory(),
-              Container(
-                child: const Center(
-                  child: const Text("MYPAGE"),
-                ),
-              ),
+              const MyPage(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
