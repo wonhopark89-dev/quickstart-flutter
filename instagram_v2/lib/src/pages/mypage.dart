@@ -3,8 +3,21 @@ import 'package:instagram_v2/src/components/avatar_widget.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/components/user_card.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
+
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
 
   Widget _statisticsOne(String title, int value) {
     return Column(
@@ -144,6 +157,39 @@ class MyPage extends StatelessWidget {
     );
   }
 
+  Widget _tabMenu() {
+    return TabBar(
+        controller: tabController,
+        indicatorColor: Colors.black,
+        indicatorWeight: 1,
+        tabs: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ImageData(IconsPath.gridViewOn),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ImageData(IconsPath.gridViewOff),
+          )
+        ]);
+  }
+
+  Widget _tabView() {
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 50,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1,
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1),
+      itemBuilder: (BuildContext context, int index) {
+        return Container(color: Colors.amberAccent);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,6 +227,9 @@ class MyPage extends StatelessWidget {
             _information(),
             _menu(),
             _discoverPeople(),
+            const SizedBox(height: 10),
+            _tabMenu(),
+            _tabView(),
           ],
         ),
       ),
