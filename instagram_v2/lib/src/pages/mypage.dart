@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_v2/src/components/avatar_widget.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
+import 'package:instagram_v2/src/components/user_card.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -53,10 +54,10 @@ class MyPage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "안녕하세요 자기소개 페이지 입니다. 구독과 좋아요",
             style: TextStyle(fontSize: 13, color: Colors.black),
           )
@@ -86,7 +87,7 @@ class MyPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
@@ -100,6 +101,46 @@ class MyPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _discoverPeople() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Discover People",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: Colors.black),
+              ),
+              Text(
+                "See All",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.w500),
+              )
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            children: List.generate(
+              10,
+              (index) => UserCard(
+                  userId: '이름$index', description: '이름$index님이 팔로우 합니다'),
+            ).toList(),
+          ),
+        ),
+      ],
     );
   }
 
@@ -139,6 +180,7 @@ class MyPage extends StatelessWidget {
           children: [
             _information(),
             _menu(),
+            _discoverPeople(),
           ],
         ),
       ),
