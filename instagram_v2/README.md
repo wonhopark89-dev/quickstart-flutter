@@ -1,6 +1,8 @@
 # instagram_v2
 
 A new Flutter project.
+## Firebase with flutter
+- https://firebase.flutter.dev/docs/overview/
 
 ## Getting Started
 

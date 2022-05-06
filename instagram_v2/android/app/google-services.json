@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "585727981044",
+    "project_id": "flufire-instagram-v2",
+    "storage_bucket": "flufire-instagram-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585727981044:android:94f1d5a2e8873ae7f1b5a1",
+        "android_client_info": {
+          "package_name": "com.clone.instargram.instagram_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585727981044-7kk3dkga3g2otu0tds9f3i32d4kjgs13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQIfuvMXIxW9ZnDV-NBinwdCwEfi9ST78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585727981044-7kk3dkga3g2otu0tds9f3i32d4kjgs13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
