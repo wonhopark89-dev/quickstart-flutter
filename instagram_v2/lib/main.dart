@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
             titleTextStyle: TextStyle(color: Colors.black)),
       ),
       initialBinding: InitBinding(),
-      home: const Root
-      (),
+      home: const Root(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_v2/src/app.dart';
+import 'package:instagram_v2/src/pages/login.dart';
 
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class Root extends StatelessWidget {
         if (user.hasData) {
           return const App();
         } else {
-          return Container();
+          return const Login();
         }
       },
     );

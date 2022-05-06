@@ -3,6 +3,15 @@
 A new Flutter project.
 ## Firebase with flutter
 - https://firebase.flutter.dev/docs/overview/
+## Social Authentication
+- https://firebase.flutter.dev/docs/auth/social
+## 안드로이드 - firebase SHA 인증서 지문 추가 ( 안드로이드 폴더에서 할 것 )
+- https://developers.google.com/android/guides/client-auth#self-signing_your_application
+```
+keytool -list -v \
+-alias androiddebugkey -keystore ~/.android/debug.keystore
+```
+
 
 ## Getting Started
 
