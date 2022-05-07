@@ -12,6 +12,7 @@ class Root extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext _, AsyncSnapshot<User?> user) {
         if (user.hasData) {
+          // todo : 내부 파이어베이스 데이터
           return const App();
         } else {
           return const Login();
