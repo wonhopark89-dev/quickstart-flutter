@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_v2/src/controller/AuthController.dart';
+import 'package:instagram_v2/src/models/instagram_user.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  final String uid;
+  const SignUpPage({Key? key, required this.uid}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nicknameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   Widget _avatar() {
     return Column(
@@ -22,21 +33,23 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _nickname() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 50),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
-        decoration: InputDecoration(
+        controller: nicknameController,
+        decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(10), hintText: "닉네임"),
       ),
     );
   }
 
   Widget _description() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 50),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
-        decoration:
-            InputDecoration(contentPadding: EdgeInsets.all(10), hintText: "설명"),
+        controller: descriptionController,
+        decoration: const InputDecoration(
+            contentPadding: EdgeInsets.all(10), hintText: "설명"),
       ),
     );
   }
@@ -69,7 +82,14 @@ class SignUpPage extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            // todo : validation
+            var signupUser = IUser(
+                uid: widget.uid,
+                nickname: nicknameController.text,
+                description: descriptionController.text);
+            AuthController.to.signup(signupUser);
+          },
           child: const Text("회원가입"),
         ),
       ),
