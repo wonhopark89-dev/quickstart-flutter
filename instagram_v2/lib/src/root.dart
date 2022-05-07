@@ -25,7 +25,9 @@ class Root extends GetView<AuthController> {
                 if (snapshot.hasData) {
                   return const App();
                 } else {
-                  return SignUpPage(uid: user.data!.uid);
+                  return Obx(() => controller.user.value.uid != null
+                      ? const App()
+                      : SignUpPage(uid: user.data!.uid));
                 }
               }));
         } else {
