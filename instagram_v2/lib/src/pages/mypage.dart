@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:instagram_v2/src/components/avatar_widget.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/components/user_card.dart';
+import 'package:instagram_v2/src/controller/AuthController.dart';
+import 'package:instagram_v2/src/controller/Mypage_controller.dart';
 
-class MyPage extends StatefulWidget {
+class MyPage extends GetView<MypageController> {
   const MyPage({Key? key}) : super(key: key);
-
-  @override
-  State<MyPage> createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
 
   Widget _statisticsOne(String title, int value) {
     return Column(
@@ -159,7 +149,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
 
   Widget _tabMenu() {
     return TabBar(
-        controller: tabController,
+        controller: controller.tabController,
         indicatorColor: Colors.black,
         indicatorWeight: 1,
         tabs: [
@@ -196,9 +186,9 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
-          "내정보",
-          style: TextStyle(
+        title: Text(
+          AuthController.to.user.value.nickname!,
+          style: const TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
         actions: [

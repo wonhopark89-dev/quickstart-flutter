@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_v2/src/binding/init_binding.dart';
 import 'package:instagram_v2/src/models/instagram_user.dart';
 import 'package:instagram_v2/src/repository/user_repository.dart';
 
@@ -15,6 +16,8 @@ class AuthController extends GetxController {
     // todo : 디비 조회
     var userData = await UserRepository.loginUserByUid(uid);
     if (userData != null) {
+      // 처음부터 바인딩 할 필요없기 때문에
+      InitBinding.additionalBinding();
       user(userData);
     }
     return userData;
