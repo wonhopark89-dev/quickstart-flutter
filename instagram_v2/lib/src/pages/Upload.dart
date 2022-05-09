@@ -5,24 +5,19 @@ import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-class Upload extends StatefulWidget {
-  const Upload({Key? key}) : super(key: key);
+class Upload extends StatelessWidget {
+  Upload({Key? key}) : super(key: key);
 
-  @override
-  State<Upload> createState() => _UploadState();
-}
-
-class _UploadState extends State<Upload> {
   var albums = <AssetPathEntity>[];
   var imageList = <AssetEntity>[];
   var headerTitle = "";
   AssetEntity? selectedImage;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadPhotos();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadPhotos();
+  // }
 
   void _loadPhotos() async {
     var result = await PhotoManager.requestPermissionExtend();
@@ -47,7 +42,7 @@ class _UploadState extends State<Upload> {
   void _loadData() async {
     headerTitle = albums.first.name;
     await _pagingPhotos();
-    update();
+    // update();
     // setState(() {
     //   headerTitle = albums.first.name;
     // });
@@ -55,16 +50,16 @@ class _UploadState extends State<Upload> {
   }
 
   Future<void> _pagingPhotos() async {
-    var photos =
-        await albums.first.getAssetListPaged(page: 0, size: 30); // 처음에 30개
+    var photos = await albums.first.getAssetListPaged(page: 0, size: 30); // 처음에 30개
     imageList.addAll(photos);
     selectedImage = imageList.first;
   }
 
-  void update() => setState(() {});
+  // void update() => setState(() {});
 
   Widget _imagePreview() {
-    var width = MediaQuery.of(context).size.width;
+    // var width = MediaQuery.of(context).size.width;
+    var width = Get.width;
     return Container(
       width: width,
       height: width,
@@ -93,30 +88,24 @@ class _UploadState extends State<Upload> {
           GestureDetector(
             onTap: () {
               showModalBottomSheet(
-                context: context,
+                context: Get.context!,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                 ),
                 isScrollControlled: true,
                 // constraints: BoxConstraints(
                 //     maxHeight: MediaQuery.of(context).size.height -
                 //         MediaQuery.of(context).padding.top),
-                builder: (_) => Container(
-                  height: (albums.length > 10
-                          ? Size.infinite.height
-                          : albums.length * 60) +
-                      MediaQuery.of(context).padding.bottom,
+                builder: (_) => SizedBox(
+                  height: (albums.length > 10 ? Size.infinite.height : albums.length * 60) +
+                      MediaQuery.of(Get.context!).padding.bottom,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Center(
                         child: Container(
-                          margin: EdgeInsets.only(top: 8),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.black),
+                          margin: const EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.black),
                           width: 40,
                           height: 4,
                         ),
@@ -128,8 +117,7 @@ class _UploadState extends State<Upload> {
                             children: List.generate(
                                 albums.length,
                                 (index) => Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15, horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                                       child: Text(albums[index].name),
                                     )),
                           ),
@@ -144,9 +132,7 @@ class _UploadState extends State<Upload> {
               padding: const EdgeInsets.all(5),
               child: Row(
                 children: [
-                  Text(headerTitle,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 18)),
+                  Text(headerTitle, style: const TextStyle(color: Colors.black, fontSize: 18)),
                   const Icon(Icons.arrow_drop_down),
                 ],
               ),
@@ -155,11 +141,8 @@ class _UploadState extends State<Upload> {
           Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                decoration: BoxDecoration(
-                    color: const Color(0xFF808080),
-                    borderRadius: BorderRadius.circular(30)),
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                decoration: BoxDecoration(color: const Color(0xFF808080), borderRadius: BorderRadius.circular(30)),
                 child: Row(
                   children: [
                     ImageData(IconsPath.imageSelectIcon),
@@ -176,8 +159,7 @@ class _UploadState extends State<Upload> {
               const SizedBox(width: 5),
               Container(
                 padding: const EdgeInsets.all(6),
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: Color(0xFF808080)),
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF808080)),
                 child: ImageData(IconsPath.cameraIcon),
               )
             ],
@@ -206,7 +188,7 @@ class _UploadState extends State<Upload> {
             return GestureDetector(
               onTap: () {
                 selectedImage = imageList[index];
-                update();
+                // update();
               },
               child: Opacity(
                 opacity: imageList[index] == selectedImage ? 0.3 : 1,
@@ -222,8 +204,7 @@ class _UploadState extends State<Upload> {
     );
   }
 
-  Widget _photoWidget(AssetEntity asset, int size,
-      {required Widget Function(Uint8List) builder}) {
+  Widget _photoWidget(AssetEntity asset, int size, {required Widget Function(Uint8List) builder}) {
     // 파일추출
     // asset.thumbnailData(200, 200); // Future 로 감싸져있음
     return FutureBuilder(
@@ -249,13 +230,10 @@ class _UploadState extends State<Upload> {
             onTap: () {
               Get.back();
             },
-            child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: ImageData(IconsPath.closeImage))),
+            child: Padding(padding: const EdgeInsets.all(15), child: ImageData(IconsPath.closeImage))),
         title: const Text(
           "New Post",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
         actions: [
           GestureDetector(

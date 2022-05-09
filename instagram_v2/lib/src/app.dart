@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
-import 'package:instagram_v2/src/controller/BottomNavController.dart';
+import 'package:instagram_v2/src/controller/bottomNavController.dart';
 import 'package:instagram_v2/src/pages/active_history.dart';
 import 'package:instagram_v2/src/pages/home.dart';
 import 'package:instagram_v2/src/pages/mypage.dart';
@@ -43,25 +43,17 @@ class App extends GetView<BottomNavController> {
               onTap: controller.changeBottomNav,
               items: [
                 BottomNavigationBarItem(
-                    icon: ImageData(IconsPath.homeOff),
-                    activeIcon: ImageData(IconsPath.homeOn),
-                    label: "home"),
+                    icon: ImageData(IconsPath.homeOff), activeIcon: ImageData(IconsPath.homeOn), label: "home"),
                 BottomNavigationBarItem(
-                    icon: ImageData(IconsPath.searchOff),
-                    activeIcon: ImageData(IconsPath.searchOn),
-                    label: "home"),
+                    icon: ImageData(IconsPath.searchOff), activeIcon: ImageData(IconsPath.searchOn), label: "home"),
+                BottomNavigationBarItem(icon: ImageData(IconsPath.uploadIcon), label: "home"),
                 BottomNavigationBarItem(
-                    icon: ImageData(IconsPath.uploadIcon), label: "home"),
-                BottomNavigationBarItem(
-                    icon: ImageData(IconsPath.activeOff),
-                    activeIcon: ImageData(IconsPath.activeOn),
-                    label: "home"),
+                    icon: ImageData(IconsPath.activeOff), activeIcon: ImageData(IconsPath.activeOn), label: "home"),
                 BottomNavigationBarItem(
                     icon: Container(
                       width: 30,
                       height: 30,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.grey),
+                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
                     ),
                     label: "avatar"),
               ]),

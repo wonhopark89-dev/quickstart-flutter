@@ -45,28 +45,16 @@ class IconsPath {
   static String get imageSelectIcon => 'assets/images/image_select_icon.jpg';
   static String get cameraIcon => 'assets/images/camera_icon.jpg';
   static String get uploadComplete => 'assets/images/upload_complete_icon.jpg';
-  static String get mypageBottomSheet01 =>
-      'assets/images/mypage_bottom_sheet_01.jpg';
-  static String get mypageBottomSheet02 =>
-      'assets/images/mypage_bottom_sheet_02.jpg';
-  static String get mypageBottomSheet03 =>
-      'assets/images/mypage_bottom_sheet_03.jpg';
-  static String get mypageBottomSheet04 =>
-      'assets/images/mypage_bottom_sheet_04.jpg';
-  static String get mypageBottomSheet05 =>
-      'assets/images/mypage_bottom_sheet_05.jpg';
-  static String get mypageBottomSheetSetting01 =>
-      'assets/images/mypage_bottom_sheet_setting_01.jpg';
-  static String get mypageBottomSheetSetting02 =>
-      'assets/images/mypage_bottom_sheet_setting_02.jpg';
-  static String get mypageBottomSheetSetting03 =>
-      'assets/images/mypage_bottom_sheet_setting_03.jpg';
-  static String get mypageBottomSheetSetting04 =>
-      'assets/images/mypage_bottom_sheet_setting_04.jpg';
-  static String get mypageBottomSheetSetting05 =>
-      'assets/images/mypage_bottom_sheet_setting_05.jpg';
-  static String get mypageBottomSheetSetting06 =>
-      'assets/images/mypage_bottom_sheet_setting_06.jpg';
-  static String get mypageBottomSheetSetting07 =>
-      'assets/images/mypage_bottom_sheet_setting_07.jpg';
+  static String get mypageBottomSheet01 => 'assets/images/mypage_bottom_sheet_01.jpg';
+  static String get mypageBottomSheet02 => 'assets/images/mypage_bottom_sheet_02.jpg';
+  static String get mypageBottomSheet03 => 'assets/images/mypage_bottom_sheet_03.jpg';
+  static String get mypageBottomSheet04 => 'assets/images/mypage_bottom_sheet_04.jpg';
+  static String get mypageBottomSheet05 => 'assets/images/mypage_bottom_sheet_05.jpg';
+  static String get mypageBottomSheetSetting01 => 'assets/images/mypage_bottom_sheet_setting_01.jpg';
+  static String get mypageBottomSheetSetting02 => 'assets/images/mypage_bottom_sheet_setting_02.jpg';
+  static String get mypageBottomSheetSetting03 => 'assets/images/mypage_bottom_sheet_setting_03.jpg';
+  static String get mypageBottomSheetSetting04 => 'assets/images/mypage_bottom_sheet_setting_04.jpg';
+  static String get mypageBottomSheetSetting05 => 'assets/images/mypage_bottom_sheet_setting_05.jpg';
+  static String get mypageBottomSheetSetting06 => 'assets/images/mypage_bottom_sheet_setting_06.jpg';
+  static String get mypageBottomSheetSetting07 => 'assets/images/mypage_bottom_sheet_setting_07.jpg';
 }

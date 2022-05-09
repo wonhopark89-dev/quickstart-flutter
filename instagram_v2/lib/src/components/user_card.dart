@@ -5,8 +5,7 @@ class UserCard extends StatelessWidget {
   final String userId;
   final String description;
 
-  const UserCard({Key? key, required this.userId, required this.description})
-      : super(key: key);
+  const UserCard({Key? key, required this.userId, required this.description}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +13,7 @@ class UserCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 3),
       width: 150,
       height: 220,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: Colors.black12)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: Colors.black12)),
       child: Stack(children: [
         Positioned(
           top: 0,
@@ -27,15 +24,11 @@ class UserCard extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               const AvatarWidget(
-                  thumbPath:
-                      "http://cogulmars.cafe24.com/img/04about_img04.png",
-                  type: AvatarType.TYPE2,
-                  size: 80),
+                  thumbPath: "http://cogulmars.cafe24.com/img/04about_img04.png", type: AvatarType.TYPE2, size: 80),
               const SizedBox(height: 10),
               Text(
                 userId,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
               ),
               Text(
                 description,

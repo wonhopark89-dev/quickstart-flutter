@@ -10,9 +10,7 @@ class ActiveHistory extends StatelessWidget {
       child: Row(
         children: const [
           AvatarWidget(
-              thumbPath: "http://cogulmars.cafe24.com/img/04about_img04.png",
-              size: 40,
-              type: AvatarType.TYPE2),
+              thumbPath: "http://cogulmars.cafe24.com/img/04about_img04.png", size: 40, type: AvatarType.TYPE2),
           SizedBox(
             width: 10,
           ),
@@ -28,10 +26,7 @@ class ActiveHistory extends StatelessWidget {
                   ),
                   TextSpan(
                     text: " 5일전",
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 13,
-                        color: Colors.black54),
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 13, color: Colors.black54),
                   )
                 ],
               ),
@@ -70,8 +65,7 @@ class ActiveHistory extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           "활동",
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
       body: SingleChildScrollView(

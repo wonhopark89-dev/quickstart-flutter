@@ -28,11 +28,7 @@ class Home extends StatelessWidget {
             child: const Center(
               child: Text(
                 "+",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    height: 1.1),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white, height: 1.1),
               ),
             ),
           ),
@@ -53,8 +49,7 @@ class Home extends StatelessWidget {
           ...List.generate(
             50,
             (index) => const AvatarWidget(
-                thumbPath:
-                    "http://m.ebichu.co.kr/web/product/medium/20200227/9dc69754e4800cf4332225fb6fcaf37b.png",
+                thumbPath: "http://m.ebichu.co.kr/web/product/medium/20200227/9dc69754e4800cf4332225fb6fcaf37b.png",
                 type: AvatarType.TYPE1),
           ),
         ],

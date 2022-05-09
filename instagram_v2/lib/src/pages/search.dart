@@ -53,9 +53,7 @@ class _SearchState extends State<Search> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
               margin: const EdgeInsets.only(left: 15),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: const Color(0xFFEFEFEF)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xFFEFEFEF)),
               child: Row(
                 children: const [
                   Icon(Icons.search),
@@ -90,8 +88,7 @@ class _SearchState extends State<Search> {
                   height: Get.width * 0.33 * groupBox[index][jndex],
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.white),
-                      color: Colors.primaries[
-                          Random().nextInt(Colors.primaries.length)]),
+                      color: Colors.primaries[Random().nextInt(Colors.primaries.length)]),
                   child: CachedNetworkImage(
                       imageUrl:
                           "http://m.ebichu.co.kr/web/product/medium/20200227/9dc69754e4800cf4332225fb6fcaf37b.png",

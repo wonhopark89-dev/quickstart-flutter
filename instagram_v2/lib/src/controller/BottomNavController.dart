@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/message_popup.dart';
+import 'package:instagram_v2/src/controller/upload_controller.dart';
 import 'package:instagram_v2/src/pages/upload.dart';
 
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
@@ -12,8 +13,7 @@ class BottomNavController extends GetxController {
 
   RxInt pageIndex = 0.obs;
 
-  GlobalKey<NavigatorState> searchPageNavigationKey =
-      GlobalKey<NavigatorState>();
+  GlobalKey<NavigatorState> searchPageNavigationKey = GlobalKey<NavigatorState>();
 
   List<int> bottomHistory = [0];
 
@@ -22,7 +22,9 @@ class BottomNavController extends GetxController {
 
     switch (page) {
       case PageName.UPLOAD:
-        Get.to(() => const Upload());
+        Get.to(() => Upload(), binding: BindingsBuilder(() {
+          Get.put(UploadController());
+        }));
         break;
       case PageName.HOME:
       case PageName.SEARCH:
@@ -33,7 +35,7 @@ class BottomNavController extends GetxController {
     }
   }
 
-  void _changePage(int value, {bool hasGesture: true}) {
+  void _changePage(int value, {bool hasGesture = true}) {
     pageIndex(value);
     if (!hasGesture) {
       // 하드웨어 뒤로가기 눌렀을때

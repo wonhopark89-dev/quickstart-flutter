@@ -16,8 +16,7 @@ class IUser {
       uid: json["uid"] == null ? "" : json["uid"] as String,
       nickname: json["nickname"] == null ? "" : json["nickname"] as String,
       thumbnail: json["thumbnail"] == null ? "" : json["thumbnail"] as String,
-      description:
-          json["description"] == null ? "" : json["description"] as String,
+      description: json["description"] == null ? "" : json["description"] as String,
     );
   }
 

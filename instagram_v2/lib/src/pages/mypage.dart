@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:instagram_v2/src/components/avatar_widget.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
 import 'package:instagram_v2/src/components/user_card.dart';
-import 'package:instagram_v2/src/controller/AuthController.dart';
+import 'package:instagram_v2/src/controller/authController.dart';
 import 'package:instagram_v2/src/controller/Mypage_controller.dart';
 
 class MyPage extends GetView<MypageController> {
@@ -14,8 +14,7 @@ class MyPage extends GetView<MypageController> {
       children: [
         Text(
           value.toString(),
-          style: const TextStyle(
-              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         Text(
           title,
@@ -78,14 +77,10 @@ class MyPage extends GetView<MypageController> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  border: Border.all(color: const Color(0xffdedede))),
+                  borderRadius: BorderRadius.circular(3), border: Border.all(color: const Color(0xffdedede))),
               child: const Text(
                 "Edit Profile",
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -117,17 +112,11 @@ class MyPage extends GetView<MypageController> {
             children: const [
               Text(
                 "Discover People",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),
               ),
               Text(
                 "See All",
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 15, color: Colors.blueAccent, fontWeight: FontWeight.w500),
               )
             ],
           ),
@@ -138,8 +127,7 @@ class MyPage extends GetView<MypageController> {
           child: Row(
             children: List.generate(
               10,
-              (index) => UserCard(
-                  userId: '이름$index', description: '이름$index님이 팔로우 합니다'),
+              (index) => UserCard(userId: '이름$index', description: '이름$index님이 팔로우 합니다'),
             ).toList(),
           ),
         ),
@@ -148,20 +136,16 @@ class MyPage extends GetView<MypageController> {
   }
 
   Widget _tabMenu() {
-    return TabBar(
-        controller: controller.tabController,
-        indicatorColor: Colors.black,
-        indicatorWeight: 1,
-        tabs: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ImageData(IconsPath.gridViewOn),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ImageData(IconsPath.gridViewOff),
-          )
-        ]);
+    return TabBar(controller: controller.tabController, indicatorColor: Colors.black, indicatorWeight: 1, tabs: [
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: ImageData(IconsPath.gridViewOn),
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: ImageData(IconsPath.gridViewOff),
+      )
+    ]);
   }
 
   Widget _tabView() {
@@ -170,10 +154,7 @@ class MyPage extends GetView<MypageController> {
       shrinkWrap: true,
       itemCount: 50,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1,
-          mainAxisSpacing: 1,
-          crossAxisSpacing: 1),
+          crossAxisCount: 3, childAspectRatio: 1, mainAxisSpacing: 1, crossAxisSpacing: 1),
       itemBuilder: (BuildContext context, int index) {
         return Container(color: Colors.amberAccent);
       },
@@ -188,8 +169,7 @@ class MyPage extends GetView<MypageController> {
         elevation: 0,
         title: Text(
           AuthController.to.user.value.nickname!,
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
         actions: [
           GestureDetector(

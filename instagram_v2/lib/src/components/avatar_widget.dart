@@ -11,12 +11,7 @@ class AvatarWidget extends StatelessWidget {
   final double? size;
 
   const AvatarWidget(
-      {Key? key,
-      this.hasStory,
-      required this.thumbPath,
-      this.nickname,
-      required this.type,
-      this.size = 60})
+      {Key? key, this.hasStory, required this.thumbPath, this.nickname, required this.type, this.size = 60})
       : super(key: key);
 
   Widget type1Widget() {
@@ -25,9 +20,7 @@ class AvatarWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.orange, Colors.pink, Colors.black]),
+              begin: Alignment.topRight, end: Alignment.bottomLeft, colors: [Colors.orange, Colors.pink, Colors.black]),
           shape: BoxShape.circle),
       child: type2Widget(),
     );
@@ -36,8 +29,7 @@ class AvatarWidget extends StatelessWidget {
   Widget type2Widget() {
     return Container(
       padding: const EdgeInsets.all(2),
-      decoration:
-          const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(size!),
         child: SizedBox(
@@ -58,7 +50,7 @@ class AvatarWidget extends StatelessWidget {
         type1Widget(),
         Text(
           nickname ?? "",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         )
       ],
     );

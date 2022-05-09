@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram_v2/src/controller/AuthController.dart';
+import 'package:instagram_v2/src/controller/authController.dart';
 import 'package:instagram_v2/src/models/instagram_user.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -34,15 +34,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     File(thumbnailXfile!.path),
                     fit: BoxFit.cover,
                   )
-                : Image.asset("assets/images/default_image.png",
-                    fit: BoxFit.cover),
+                : Image.asset("assets/images/default_image.png", fit: BoxFit.cover),
           ),
         ),
         const SizedBox(height: 15),
         ElevatedButton(
             onPressed: () async {
-              thumbnailXfile = await _picker.pickImage(
-                  source: ImageSource.gallery, imageQuality: 50);
+              thumbnailXfile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
               update();
             },
             child: const Text("이미지 변경"))
@@ -55,8 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
         controller: nicknameController,
-        decoration: const InputDecoration(
-            contentPadding: EdgeInsets.all(10), hintText: "닉네임"),
+        decoration: const InputDecoration(contentPadding: EdgeInsets.all(10), hintText: "닉네임"),
       ),
     );
   }
@@ -66,8 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
         controller: descriptionController,
-        decoration: const InputDecoration(
-            contentPadding: EdgeInsets.all(10), hintText: "설명"),
+        decoration: const InputDecoration(contentPadding: EdgeInsets.all(10), hintText: "설명"),
       ),
     );
   }
@@ -102,10 +98,8 @@ class _SignUpPageState extends State<SignUpPage> {
         child: ElevatedButton(
           onPressed: () {
             // todo : validation
-            var signupUser = IUser(
-                uid: widget.uid,
-                nickname: nicknameController.text,
-                description: descriptionController.text);
+            var signupUser =
+                IUser(uid: widget.uid, nickname: nicknameController.text, description: descriptionController.text);
             AuthController.to.signup(signupUser, thumbnailXfile);
           },
           child: const Text("회원가입"),

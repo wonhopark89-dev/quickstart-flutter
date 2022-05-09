@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
-import 'package:instagram_v2/src/controller/BottomNavController.dart';
+import 'package:instagram_v2/src/controller/bottomNavController.dart';
 
 class SearchFocus extends StatefulWidget {
   const SearchFocus({Key? key}) : super(key: key);
@@ -10,8 +9,7 @@ class SearchFocus extends StatefulWidget {
   State<SearchFocus> createState() => _SearchFocusState();
 }
 
-class _SearchFocusState extends State<SearchFocus>
-    with TickerProviderStateMixin {
+class _SearchFocusState extends State<SearchFocus> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -41,13 +39,7 @@ class _SearchFocusState extends State<SearchFocus>
         child: TabBar(
             controller: _tabController,
             indicatorColor: Colors.black,
-            tabs: [
-              _tabMenuOne("인기"),
-              _tabMenuOne("계정"),
-              _tabMenuOne("오디오"),
-              _tabMenuOne("태그"),
-              _tabMenuOne("장소")
-            ]),
+            tabs: [_tabMenuOne("인기"), _tabMenuOne("계정"), _tabMenuOne("오디오"), _tabMenuOne("태그"), _tabMenuOne("장소")]),
       ),
       preferredSize: Size.fromHeight(AppBar().preferredSize.height),
     );
@@ -89,9 +81,7 @@ class _SearchFocusState extends State<SearchFocus>
         titleSpacing: 0,
         title: Container(
           margin: const EdgeInsets.only(right: 15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: const Color(0xFFEFEFEF)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: const Color(0xFFEFEFEF)),
           child: const TextField(
             decoration: InputDecoration(
                 border: InputBorder.none,
