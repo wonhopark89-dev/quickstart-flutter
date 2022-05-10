@@ -3,80 +3,32 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_v2/src/components/image_data.dart';
+import 'package:instagram_v2/src/controller/upload_controller.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-class Upload extends StatelessWidget {
-  Upload({Key? key}) : super(key: key);
-
-  var albums = <AssetPathEntity>[];
-  var imageList = <AssetEntity>[];
-  var headerTitle = "";
-  AssetEntity? selectedImage;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadPhotos();
-  // }
-
-  void _loadPhotos() async {
-    var result = await PhotoManager.requestPermissionExtend();
-    if (result.isAuth) {
-      albums = await PhotoManager.getAssetPathList(
-        type: RequestType.image,
-        filterOption: FilterOptionGroup(
-            imageOption: const FilterOption(
-              sizeConstraint: SizeConstraint(minHeight: 100, minWidth: 100),
-            ),
-            orders: const [
-              // 사진이 최신순으로
-              OrderOption(type: OrderOptionType.createDate, asc: false)
-            ]),
-      );
-      _loadData();
-    } else {
-      // 권한 요청
-    }
-  }
-
-  void _loadData() async {
-    headerTitle = albums.first.name;
-    await _pagingPhotos();
-    // update();
-    // setState(() {
-    //   headerTitle = albums.first.name;
-    // });
-    // print(albums.first.name);
-  }
-
-  Future<void> _pagingPhotos() async {
-    var photos = await albums.first.getAssetListPaged(page: 0, size: 30); // 처음에 30개
-    imageList.addAll(photos);
-    selectedImage = imageList.first;
-  }
+class Upload extends GetView<UploadController> {
+  const Upload({Key? key}) : super(key: key);
 
   // void update() => setState(() {});
 
   Widget _imagePreview() {
     // var width = MediaQuery.of(context).size.width;
     var width = Get.width;
-    return Container(
-      width: width,
-      height: width,
-      color: Colors.grey,
-      child: selectedImage == null
-          ? Container()
-          : _photoWidget(
-              selectedImage!,
-              width.toInt(),
-              builder: (data) {
-                return Image.memory(
-                  data,
-                  fit: BoxFit.cover,
-                );
-              },
-            ),
-    );
+    return Obx(() => Container(
+          width: width,
+          height: width,
+          color: Colors.grey,
+          child: _photoWidget(
+            controller.selectedImage.value,
+            width.toInt(),
+            builder: (data) {
+              return Image.memory(
+                data,
+                fit: BoxFit.cover,
+              );
+            },
+          ),
+        ));
   }
 
   Widget _header() {
@@ -97,7 +49,7 @@ class Upload extends StatelessWidget {
                 //     maxHeight: MediaQuery.of(context).size.height -
                 //         MediaQuery.of(context).padding.top),
                 builder: (_) => SizedBox(
-                  height: (albums.length > 10 ? Size.infinite.height : albums.length * 60) +
+                  height: (controller.albums.length > 10 ? Size.infinite.height : controller.albums.length * 60) +
                       MediaQuery.of(Get.context!).padding.bottom,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,10 +67,10 @@ class Upload extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: List.generate(
-                                albums.length,
+                                controller.albums.length,
                                 (index) => Container(
                                       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                                      child: Text(albums[index].name),
+                                      child: Text(controller.albums[index].name),
                                     )),
                           ),
                         ),
@@ -132,7 +84,7 @@ class Upload extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               child: Row(
                 children: [
-                  Text(headerTitle, style: const TextStyle(color: Colors.black, fontSize: 18)),
+                  Text(controller.headerTitle, style: const TextStyle(color: Colors.black, fontSize: 18)),
                   const Icon(Icons.arrow_drop_down),
                 ],
               ),
@@ -179,24 +131,21 @@ class Upload extends StatelessWidget {
         mainAxisSpacing: 1,
         crossAxisSpacing: 1,
       ),
-      itemCount: imageList.length,
+      itemCount: controller.imageList.length,
       itemBuilder: (BuildContext context, int index) {
         return _photoWidget(
-          imageList[index],
+          controller.imageList[index],
           200,
           builder: (data) {
             return GestureDetector(
-              onTap: () {
-                selectedImage = imageList[index];
-                // update();
-              },
-              child: Opacity(
-                opacity: imageList[index] == selectedImage ? 0.3 : 1,
-                child: Image.memory(
-                  data,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              onTap: () => {controller.changeSelectedImage(controller.imageList[index])},
+              child: Obx(() => Opacity(
+                    opacity: controller.imageList[index] == controller.selectedImage.value ? 0.3 : 1,
+                    child: Image.memory(
+                      data,
+                      fit: BoxFit.cover,
+                    ),
+                  )),
             );
           },
         );
