@@ -35,8 +35,9 @@ class UploadController extends GetxController {
   }
 
   void _loadData() async {
-    headerTitle(albums.first.name);
-    await _pagingPhotos();
+    changeAlbum(albums.first);
+    // headerTitle(albums.first.name);
+    // await _pagingPhotos();
     // update();
     // setState(() {
     //   headerTitle = albums.first.name;
@@ -44,13 +45,22 @@ class UploadController extends GetxController {
     // print(albums.first.name);
   }
 
-  Future<void> _pagingPhotos() async {
-    var photos = await albums.first.getAssetListPaged(page: 0, size: 30); // 처음에 30개
+  Future<void> _pagingPhotos(AssetPathEntity album) async {
+    imageList.clear();
+
+    var photos = await album.getAssetListPaged(page: 0, size: 30); // 처음에 30개
     imageList.addAll(photos);
     changeSelectedImage(imageList.first);
   }
 
   changeSelectedImage(AssetEntity image) {
     selectedImage(image);
+  }
+
+  void changeAlbum(AssetPathEntity album) async {
+    // headerTitle(albums.first.name);
+    headerTitle(album.name);
+    await _pagingPhotos(album);
+    // Get.back(); 맨처음 들어오면 바로 뒤로 나가버림
   }
 }

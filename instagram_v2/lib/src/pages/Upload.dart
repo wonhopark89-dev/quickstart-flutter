@@ -68,10 +68,13 @@ class Upload extends GetView<UploadController> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: List.generate(
                                 controller.albums.length,
-                                (index) => Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                                      child: Text(controller.albums[index].name),
-                                    )),
+                                (index) => GestureDetector(
+                                  onTap: (){controller.changeAlbum(controller.albums[index])},
+                                  child: Container(
+                                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                                        child: Text(controller.albums[index].name),
+                                      ),
+                                )),
                           ),
                         ),
                       )
