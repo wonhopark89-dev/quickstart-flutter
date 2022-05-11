@@ -4,8 +4,8 @@ import 'package:photo_manager/photo_manager.dart';
 // 페이지가 뜰때 생성됨 ( bottom nav 에서 연결했기 때문에 )
 class UploadController extends GetxController {
   var albums = <AssetPathEntity>[];
-  var imageList = <AssetEntity>[];
-  var headerTitle = "";
+  RxList<AssetEntity> imageList = <AssetEntity>[].obs;
+  RxString headerTitle = "".obs;
   Rx<AssetEntity> selectedImage = const AssetEntity(id: '0', typeInt: 0, width: 0, height: 0).obs;
 
   @override
@@ -35,7 +35,7 @@ class UploadController extends GetxController {
   }
 
   void _loadData() async {
-    headerTitle = albums.first.name;
+    headerTitle(albums.first.name);
     await _pagingPhotos();
     // update();
     // setState(() {

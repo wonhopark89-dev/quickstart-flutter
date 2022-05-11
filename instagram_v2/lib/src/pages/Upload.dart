@@ -84,7 +84,12 @@ class Upload extends GetView<UploadController> {
               padding: const EdgeInsets.all(5),
               child: Row(
                 children: [
-                  Text(controller.headerTitle, style: const TextStyle(color: Colors.black, fontSize: 18)),
+                  Obx(
+                    () => Text(
+                      controller.headerTitle.value,
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                  ),
                   const Icon(Icons.arrow_drop_down),
                 ],
               ),
@@ -122,34 +127,36 @@ class Upload extends GetView<UploadController> {
   }
 
   Widget _imageSelectList() {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        childAspectRatio: 1, // 정사각형
-        mainAxisSpacing: 1,
-        crossAxisSpacing: 1,
+    return Obx(
+      () => GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          childAspectRatio: 1, // 정사각형
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1,
+        ),
+        itemCount: controller.imageList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _photoWidget(
+            controller.imageList[index],
+            200,
+            builder: (data) {
+              return GestureDetector(
+                onTap: () => {controller.changeSelectedImage(controller.imageList[index])},
+                child: Obx(() => Opacity(
+                      opacity: controller.imageList[index] == controller.selectedImage.value ? 0.3 : 1,
+                      child: Image.memory(
+                        data,
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+              );
+            },
+          );
+        },
       ),
-      itemCount: controller.imageList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return _photoWidget(
-          controller.imageList[index],
-          200,
-          builder: (data) {
-            return GestureDetector(
-              onTap: () => {controller.changeSelectedImage(controller.imageList[index])},
-              child: Obx(() => Opacity(
-                    opacity: controller.imageList[index] == controller.selectedImage.value ? 0.3 : 1,
-                    child: Image.memory(
-                      data,
-                      fit: BoxFit.cover,
-                    ),
-                  )),
-            );
-          },
-        );
-      },
     );
   }
 
