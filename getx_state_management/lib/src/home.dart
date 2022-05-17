@@ -38,9 +38,31 @@ class Home extends StatelessWidget {
               Get.toNamed("/first");
             },
             child: const Text("Named 라우트"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Arguments 로 넘길 수 있는 것들 ( String, Map, Class.. )
+              // Get.toNamed("/next", arguments: "파라미터");
+              // Get.toNamed("/next", arguments: {"name": "펭수", "age": 10});
+              Get.toNamed("/next", arguments: User(name: "펭수2", age: 11));
+            },
+            child: const Text("Arguments 전달"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Get.toNamed("user/12345");
+              Get.toNamed("user/12345?name=펭수3&age=13");
+            },
+            child: const Text("동적 url"),
           )
         ],
       )),
     );
   }
+}
+
+class User {
+  String name;
+  int age;
+  User({required this.name, required this.age});
 }
