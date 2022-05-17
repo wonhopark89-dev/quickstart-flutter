@@ -28,6 +28,16 @@ class Home extends StatelessWidget {
               Get.to(const FirstPage());
             },
             child: const Text("일반적인 라우트"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // 기존
+              // Navigator.of(context).pushNamed("/first");
+
+              // Getx
+              Get.toNamed("/first");
+            },
+            child: const Text("Named 라우트"),
           )
         ],
       )),
