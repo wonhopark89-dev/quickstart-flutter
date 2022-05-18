@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               // Get.toNamed("user/12345");
-              Get.toNamed("user/12345?name=펭수3&age=13");
+              Get.toNamed("/user/12345?name=펭수3&age=13");
             },
             child: const Text("동적 url"),
           )
