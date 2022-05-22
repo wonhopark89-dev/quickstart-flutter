@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:getx_state_management/src/controller/count_controller_with_provider.dart';
 import 'package:getx_state_management/src/pages/state/with_getx.dart';
 import 'package:getx_state_management/src/pages/state/with_provider.dart';
+import 'package:provider/provider.dart';
 
 class SimpleStateManagePage extends StatelessWidget {
   const SimpleStateManagePage({Key? key}) : super(key: key);
@@ -13,9 +15,15 @@ class SimpleStateManagePage extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Expanded(child: WithGetX()),
-          Expanded(child: WithProvider()),
+        children: [
+          const Expanded(child: WithGetX()),
+          Expanded(
+            child: ChangeNotifierProvider<CountControllerWithProvider>(
+              create: (_) => CountControllerWithProvider(),
+              child: const WithProvider(),
+            ),
+          )
+          // Expanded(child: WithProvider()),
         ],
       ),
     );
