@@ -8,11 +8,11 @@ class WithGetX extends StatelessWidget {
   final CountControllerWithGetx _countControllerWithGetx = Get.put(CountControllerWithGetx());
 
   // context 종속없이 분리가능
-  Widget _button() {
+  Widget _button(String id) {
     return ElevatedButton(
       onPressed: () {
         // Get.find<CountControllerWithGetx>().increase();
-        _countControllerWithGetx.increase();
+        _countControllerWithGetx.increase(id);
       },
       child: const Text(
         "+",
@@ -29,6 +29,7 @@ class WithGetX extends StatelessWidget {
         children: [
           const Text("GetX", style: TextStyle(fontSize: 30)),
           GetBuilder<CountControllerWithGetx>(
+            id: "first",
             builder: ((controller) {
               return Text(
                 "${controller.count}",
@@ -36,7 +37,17 @@ class WithGetX extends StatelessWidget {
               );
             }),
           ),
-          _button(),
+          GetBuilder<CountControllerWithGetx>(
+            id: "second",
+            builder: ((controller) {
+              return Text(
+                "${controller.count}",
+                style: const TextStyle(fontSize: 50),
+              );
+            }),
+          ),
+          _button("first"),
+          _button("second"),
         ],
       ),
     );

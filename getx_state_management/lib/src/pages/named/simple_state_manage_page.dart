@@ -19,7 +19,7 @@ class SimpleStateManagePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(child: WithGetX()),
+          Expanded(child: WithGetX()),
           Expanded(
             child: ChangeNotifierProvider<CountControllerWithProvider>(
               create: (_) => CountControllerWithProvider(),
