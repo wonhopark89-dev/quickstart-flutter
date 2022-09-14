@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MyPageSnackBar extends StatelessWidget {
   const MyPageSnackBar({Key? key}) : super(key: key);
@@ -30,7 +31,10 @@ class MyPageSnackBar extends StatelessWidget {
       //     );
       //   },
       // ),
-      body: const MySnackBar(),
+      body: Column(children: const [
+        MySnackBar(),
+        MyToast(),
+      ]),
     );
   }
 }
@@ -62,4 +66,34 @@ class MySnackBar extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyToast extends StatelessWidget {
+  const MyToast({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          flutterToast();
+        },
+        style: ElevatedButton.styleFrom(primary: Colors.red),
+        child: const Text(
+          'Show Toast',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+void flutterToast() {
+  Fluttertoast.showToast(
+      msg: 'Flutter Toast',
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.red[250],
+      fontSize: 20,
+      textColor: Colors.white,
+      toastLength: Toast.LENGTH_SHORT);
 }
