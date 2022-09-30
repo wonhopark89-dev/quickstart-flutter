@@ -35,7 +35,7 @@ class MyPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (routeContext) => SecondPage(),
+                  builder: (_) => SecondPage(),
                 ),
               );
             },

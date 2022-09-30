@@ -1,4 +1,6 @@
-import 'package:basic_app/myPage.dart';
+import 'package:basic_app/ScreenA.dart';
+import 'package:basic_app/ScreenB.dart';
+import 'package:basic_app/ScreenC.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -14,9 +16,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => ScreenA(),
+        '/b': (context) => ScreenB(),
+        '/c': (context) => ScreenC(),
+      },
       // home: const MyCard(),
       // home: const MyPageSnackBar());
-      home: const MyPage(),
+      // home: const MyPage(),
     );
   }
 }
