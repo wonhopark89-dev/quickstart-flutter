@@ -1,3 +1,4 @@
+import 'package:basic_app/secondPage.dart';
 import 'package:flutter/material.dart';
 
 class MyPage extends StatelessWidget {
@@ -29,6 +30,17 @@ class MyPage extends StatelessWidget {
             },
             icon: const Icon(Icons.search),
           ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (routeContext) => SecondPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.navigate_next),
+          )
         ],
       ),
       drawer: Drawer(

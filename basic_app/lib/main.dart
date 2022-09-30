@@ -1,4 +1,4 @@
-import 'package:basic_app/myPageSnackBar.dart';
+import 'package:basic_app/myPage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -9,14 +9,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'First App',
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-        ),
-        // home: const MyCard(),
-        // home: const MyPage(),
-        home: const MyPageSnackBar());
+      debugShowCheckedModeBanner: false,
+      title: 'First App',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      // home: const MyCard(),
+      // home: const MyPageSnackBar());
+      home: const MyPage(),
+    );
   }
 }
 
