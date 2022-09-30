@@ -28,6 +28,23 @@ class ScreenA extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.thumb_up),
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Like a new Snak bar'),
+              duration: Duration(seconds: 3),
+              action: SnackBarAction(
+                label: 'Go to Screen C',
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/c');
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
