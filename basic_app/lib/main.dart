@@ -1,9 +1,11 @@
 import 'package:basic_app/ScreenA.dart';
 import 'package:basic_app/ScreenB.dart';
 import 'package:basic_app/ScreenC.dart';
+import 'package:basic_app/onBoardingMain.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+// void main() => runApp(const MyApp());
+void main() => runApp(const MyOnBoardingApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
