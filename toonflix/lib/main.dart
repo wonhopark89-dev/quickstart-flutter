@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 80,
@@ -36,10 +37,59 @@ class MyApp extends StatelessWidget {
                       ),
                       Text(
                         'Welcome back',
-                        style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 18),
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.8),
+                          fontSize: 18,
+                        ),
                       ),
                     ],
                   )
+                ],
+              ),
+              const SizedBox(
+                height: 120,
+              ),
+              Text(
+                'Total Balance',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Text(
+                '\$9 123 456',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 50,
+                      ),
+                      child: Text(
+                        'Transfer',
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
