@@ -3,6 +3,7 @@ import 'package:toonflix/models/webtoon_detail_model.dart';
 import 'package:toonflix/models/webtoon_episode_model.dart';
 import 'package:toonflix/models/webtoon_model.dart';
 import 'package:toonflix/services/api_service.dart';
+import 'package:toonflix/widgets/episode_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   final WebtoonModel webtoon;
@@ -99,35 +100,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   if (snapshot.hasData) {
                     return Column(
                       children: [
-                        for (var epicode in snapshot.data!)
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.green.shade400,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 5),
-                                  color: Colors.black.withOpacity(0.3),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  epicode.title,
-                                  style:
-                                      const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
-                                ),
-                                const Icon(
-                                  Icons.chevron_right_outlined,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                        for (var episode in snapshot.data!)
+                          Episode(
+                            episode: episode,
+                            webtoonId: widget.webtoon.id,
                           ),
                       ],
                     );
